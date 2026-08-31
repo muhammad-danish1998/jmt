@@ -8,10 +8,12 @@ export async function POST(request) {
     const expectedPassword = process.env.ADMIN_PASSWORD || 'jmtcollege2026';
 
     const inputUsername = (username || '').trim().toLowerCase();
+    const inputPassword = (password || '').trim();
+
     const isPasswordCorrect =
-      password === expectedPassword ||
-      password === 'jmtcollege2026' ||
-      password === 'jmt2026';
+      inputPassword === expectedPassword ||
+      inputPassword === 'jmtcollege2026' ||
+      inputPassword === 'jmt2026';
 
     if (inputUsername === expectedUsername && isPasswordCorrect) {
       const response = NextResponse.json(
@@ -23,7 +25,7 @@ export async function POST(request) {
       response.cookies.set('admin_auth_token', 'jmt_authenticated_session_token_2026', {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
+        sameSite: 'lax',
         maxAge: 60 * 60 * 24 * 7, // 7 days
         path: '/',
       });

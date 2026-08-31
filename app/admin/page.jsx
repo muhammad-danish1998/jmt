@@ -53,6 +53,7 @@ export default function AdminPage() {
         headers: {
           'x-admin-token': token,
         },
+        credentials: 'include',
       });
       const data = await response.json();
 
@@ -60,7 +61,15 @@ export default function AdminPage() {
         setIsAuthenticated(true);
         setEnquiries(data.enquiries || []);
       } else {
-        if (!isInitialCheck) setIsAuthenticated(false);
+        if (response.status === 401) {
+          if (typeof window !== 'undefined') localStorage.removeItem('admin_token');
+          setIsAuthenticated(false);
+        } else {
+          // If server returned non-401 (e.g. database error), keep user on dashboard and show empty/error
+          if (!isInitialCheck) {
+            alert(data.error || 'Failed to fetch database records.');
+          }
+        }
       }
     } catch (err) {
       if (!isInitialCheck) console.error('Fetch enquiries error:', err);
@@ -79,7 +88,8 @@ export default function AdminPage() {
       const res = await fetch('/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        credentials: 'include',
+        body: JSON.stringify({ username: username.trim(), password: password.trim() }),
       });
 
       const data = await res.json();
