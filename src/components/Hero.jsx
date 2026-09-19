@@ -1,176 +1,210 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { ArrowRight, ChevronRight, ChevronLeft, GraduationCap } from 'lucide-react';
+import React from 'react';
+import {
+  ArrowRight,
+  GraduationCap,
+  Check,
+  Award,
+  Trophy,
+  Users,
+  Star,
+  ShieldCheck,
+  BookOpen,
+} from 'lucide-react';
 
-export default function Hero() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  // Real campus, administration & faculty visual slides
-  const slides = [
-    {
-      title: 'JMT School & College Campus',
-      alt: 'JMT Public Higher Secondary School & College Karachi - Ziauddin Board (ZUEB) Campus Infrastructure',
-      subtitle: 'State-of-the-art infrastructure fostering quality education.',
-      image: '/school.jpg',
-    },
-    {
-      title: 'Academic Leadership & Excellence',
-      alt: 'Academic Leadership & Excellence - Ziauddin Examination Board Karachi',
-      subtitle: 'Experienced administration committed to student career growth.',
-      image: '/hm.jpg',
-    },
-    {
-      title: 'Dedicated & Qualified Faculty',
-      alt: 'Dedicated & Qualified Faculty - Matric & Intermediate Programs Karachi',
-      subtitle: 'Interactive learning environment shaping future leaders.',
-      image: '/teacher.jpg',
-    },
-  ];
-
-  // Auto slide effect
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [slides.length]);
-
+export default function Hero({ onOpenEnroll }) {
   return (
     <section id="home" className="relative bg-white py-12 lg:py-20 overflow-hidden border-b border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Decorative Background Orbs & Ambient Glows */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100/60 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
+      <div className="absolute bottom-0 left-10 w-96 h-96 bg-amber-100/40 rounded-full blur-3xl pointer-events-none -mb-20" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
           {/* Left Column: Hero Content & CTAs */}
-          <div className="lg:col-span-6 space-y-6 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-900 text-xs sm:text-sm font-semibold tracking-wide shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
-              Academic Session 2026 - 2027
+          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+            
+            {/* Live Session Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-900 text-xs sm:text-sm font-bold tracking-wide shadow-xs">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Academic Session 2026 - 2027 • Ziauddin Board (ZUEB)</span>
             </div>
 
+            {/* Main Primary H1 Title */}
             <div className="space-y-2">
-              <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
-                Admissions Open <br className="hidden sm:inline" />
-                <span className="text-blue-900">for 2026-27</span>
+              <h1 className="text-3xl sm:text-5xl xl:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+                Quality Education &amp; Bright Futures with{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-950">
+                  Ziauddin Board
+                </span>
               </h1>
-              <p className="text-2xl sm:text-3xl font-bold text-slate-700 tracking-tight">
-                Classes IX, X, XI & XII • Ziauddin Board (ZUEB)
+              <p className="text-lg sm:text-xl font-bold text-slate-700 tracking-tight">
+                Classes IX, X, XI &amp; XII • Regular, Private &amp; Combine Gap Streams
               </p>
             </div>
 
+            {/* 4 Feature Bullet Points inspired by Reference Site */}
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-left text-sm text-slate-700 font-medium pt-1">
+              <li className="flex items-center gap-2.5">
+                <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                  <Check className="w-3.5 h-3.5" />
+                </span>
+                <span>Experienced &amp; Qualified Educators</span>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                  <Check className="w-3.5 h-3.5" />
+                </span>
+                <span>Modern Labs &amp; Digital Classrooms</span>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                  <Check className="w-3.5 h-3.5" />
+                </span>
+                <span>Proven Results &amp; Past Paper Coaching</span>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                  <Check className="w-3.5 h-3.5" />
+                </span>
+                <span>Safe, Disciplined &amp; Ethical Campus</span>
+              </li>
+            </ul>
+
             {/* Value Proposition Highlight Card */}
-            <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 shadow-xs max-w-xl mx-auto lg:mx-0 text-left">
+            <div className="bg-gradient-to-r from-slate-50 to-blue-50/50 border border-slate-200 rounded-xl p-4 sm:p-5 shadow-xs max-w-xl mx-auto lg:mx-0 text-left">
               <div className="flex items-start gap-3.5">
                 <div className="w-10 h-10 rounded-lg bg-blue-900 text-white flex items-center justify-center shrink-0 shadow-xs mt-0.5">
                   <GraduationCap className="w-5 h-5" />
                 </div>
-                <div className="space-y-1.5">
-                  <h2 className="text-base sm:text-lg lg:text-xl font-bold text-slate-900 leading-snug">
-                    Complete Your Matriculation or <br className="hidden sm:inline" />
-                    Intermediate in Just <span className="text-blue-900 font-extrabold">3 Months</span>*
+                <div className="space-y-1">
+                  <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                    Complete Your Matriculation or Intermediate in Just{' '}
+                    <span className="text-blue-900 font-black underline decoration-amber-400 decoration-2">
+                      3 Months*
+                    </span>
                   </h2>
-                  <p className="text-[11px] sm:text-xs text-slate-500 leading-normal">
-                    *Subject to eligibility and applicable examination/board requirements.
+                  <p className="text-xs text-slate-500 leading-normal">
+                    *Fast-track preparation subject to Ziauddin Board eligibility guidelines.
                   </p>
                 </div>
               </div>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
+              <button
+                type="button"
+                onClick={onOpenEnroll}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-extrabold px-8 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 text-base cursor-pointer"
+              >
+                <span>Apply for Admission</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+              
               <a
                 href="#eligibility"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-blue-950 text-white font-semibold px-8 py-3.5 rounded-lg shadow-sm hover:shadow transition-all duration-200 active:scale-95 text-base"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-blue-950 text-white font-semibold px-7 py-3.5 rounded-xl shadow-xs hover:shadow transition-all duration-200 active:scale-95 text-base"
               >
-                <span>Check Eligibility</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-              <a
-                href="#about"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-300 hover:border-slate-400 font-semibold px-8 py-3.5 rounded-lg transition-all duration-200 active:scale-95 text-base"
-              >
-                <span>Explore Our College</span>
-                <ChevronRight className="w-4 h-4" />
+                <span>Check Eligibility Criteria</span>
               </a>
             </div>
-          </div>
 
-          {/* Right Column: Campus Image Carousel Slider */}
-          <div className="lg:col-span-6">
-            <div className="relative group rounded-2xl overflow-hidden shadow-xl border border-slate-200 bg-slate-100 aspect-[4/3] sm:aspect-[16/10]">
-              {/* Slide Images */}
-              {slides.map((slide, idx) => (
-                <div
-                  key={slide.title}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                    idx === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-                  }`}
-                >
-                  <img
-                    src={slide.image}
-                    alt={slide.alt || slide.title}
-                    width={800}
-                    height={500}
-                    loading={idx === 0 ? 'eager' : 'lazy'}
-                    fetchPriority={idx === 0 ? 'high' : 'auto'}
-                    className="w-full h-full object-cover"
-                  />
-                  {/* Gradient Overlay & Caption */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent flex flex-col justify-end p-6 sm:p-8 text-white">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-blue-300 mb-1">
-                      Campus Life
-                    </span>
-                    <h3 className="text-lg sm:text-xl font-bold">{slide.title}</h3>
-                    <p className="text-xs sm:text-sm text-slate-200 line-clamp-2 mt-1">
-                      {slide.subtitle}
-                    </p>
-                  </div>
-                </div>
-              ))}
-
-              {/* Prev / Next Controls */}
-              <button
-                onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-                className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-slate-900 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-md focus:outline-none"
-                aria-label="Previous Slide"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-slate-900 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-md focus:outline-none"
-                aria-label="Next Slide"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-
-              {/* Carousel Indicators */}
-              <div className="absolute bottom-4 right-6 z-20 flex items-center gap-2">
-                {slides.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentSlide(idx)}
-                    className={`h-2.5 rounded-full transition-all duration-300 focus:outline-none ${
-                      idx === currentSlide ? 'w-8 bg-white shadow-xs' : 'w-2.5 bg-white/50 hover:bg-white/75'
-                    }`}
-                    aria-label={`Go to slide ${idx + 1}`}
-                  />
-                ))}
+            {/* Quick Hero Statistics Strip */}
+            <div className="pt-4 border-t border-slate-100 grid grid-cols-4 gap-2 sm:gap-4 max-w-xl mx-auto lg:mx-0 text-center sm:text-left">
+              <div>
+                <strong className="text-lg sm:text-2xl font-black text-slate-900 block leading-tight">1,000+</strong>
+                <span className="text-[11px] sm:text-xs text-slate-500 font-medium">Enrolled Students</span>
+              </div>
+              <div className="border-l border-slate-200 pl-2 sm:pl-4">
+                <strong className="text-lg sm:text-2xl font-black text-slate-900 block leading-tight">10+</strong>
+                <span className="text-[11px] sm:text-xs text-slate-500 font-medium">Years Excellence</span>
+              </div>
+              <div className="border-l border-slate-200 pl-2 sm:pl-4">
+                <strong className="text-lg sm:text-2xl font-black text-blue-900 block leading-tight">ZUEB</strong>
+                <span className="text-[11px] sm:text-xs text-slate-500 font-medium">Certified Center</span>
+              </div>
+              <div className="border-l border-slate-200 pl-2 sm:pl-4">
+                <strong className="text-lg sm:text-2xl font-black text-amber-600 block leading-tight">100%</strong>
+                <span className="text-[11px] sm:text-xs text-slate-500 font-medium">Board Support</span>
               </div>
             </div>
 
-            {/* Pagination dots below matching wireframe */}
-            <div className="flex items-center justify-center gap-2 mt-4">
-              {slides.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentSlide(idx)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all ${
-                    idx === currentSlide ? 'bg-slate-900 scale-125' : 'bg-slate-300 hover:bg-slate-400'
-                  }`}
-                  aria-label={`Slide bullet ${idx + 1}`}
+          </div>
+
+          {/* Right Column: Visual Showcase Frame with Corner Accents & Floating Badges */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative mx-auto max-w-md lg:max-w-none">
+              
+              {/* Image Frame Container */}
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-100 aspect-[4/3] sm:aspect-[16/12] group">
+                <img
+                  src="/school.jpg"
+                  alt="JMT Public Higher Secondary School & College Karachi - Ziauddin Board (ZUEB) Campus"
+                  width={800}
+                  height={600}
+                  fetchPriority="high"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-              ))}
+
+                {/* Dark Gradient Overlay for Depth */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent flex flex-col justify-end p-6 text-white">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-900/90 text-amber-300 text-xs font-bold border border-blue-700/60 w-fit mb-1">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    <span>Ziauddin Board Certified Center</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-white leading-tight">
+                    JMT Public Higher Secondary School &amp; College
+                  </h3>
+                  <p className="text-xs text-slate-200">
+                    Quaidabad, Bin Qasim, Malir, Karachi
+                  </p>
+                </div>
+              </div>
+
+              {/* Floating Card 1 — Top Board Results (Top Left) */}
+              <div className="absolute -top-4 -left-4 sm:-left-6 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 shadow-xl border border-slate-200 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-2 duration-500 hidden sm:flex">
+                <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-200 shadow-xs">
+                  <Trophy className="w-5 h-5" />
+                </div>
+                <div>
+                  <strong className="text-xs font-bold text-slate-900 block leading-tight">
+                    Top Board Results
+                  </strong>
+                  <span className="text-[11px] text-slate-500">Every Exam Session</span>
+                </div>
+              </div>
+
+              {/* Floating Card 2 — Active Students (Bottom Right) */}
+              <div className="absolute -bottom-5 -right-4 sm:-right-6 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 shadow-xl border border-slate-200 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-3 duration-700 hidden sm:flex">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-900 flex items-center justify-center shrink-0 border border-blue-200 shadow-xs">
+                  <Users className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-1">
+                    <strong className="text-xs font-black text-slate-900">650+</strong>
+                    <span className="text-[11px] font-bold text-emerald-600">Active</span>
+                  </div>
+                  <span className="text-[11px] text-slate-500">Ziauddin Board Students</span>
+                </div>
+              </div>
+
+              {/* Floating Card 3 — 5 Star Rating (Bottom Left) */}
+              <div className="absolute -bottom-6 left-4 bg-slate-900/90 backdrop-blur-md text-white rounded-xl px-3.5 py-2 shadow-lg border border-slate-700 flex items-center gap-2 hidden lg:flex">
+                <div className="flex text-amber-400">
+                  <Star className="w-3.5 h-3.5 fill-amber-400" />
+                  <Star className="w-3.5 h-3.5 fill-amber-400" />
+                  <Star className="w-3.5 h-3.5 fill-amber-400" />
+                  <Star className="w-3.5 h-3.5 fill-amber-400" />
+                  <Star className="w-3.5 h-3.5 fill-amber-400" />
+                </div>
+                <span className="text-[11px] font-semibold text-slate-200">
+                  Trusted by Parents
+                </span>
+              </div>
+
             </div>
           </div>
 
