@@ -93,8 +93,74 @@ export default function SingleBlogPage() {
   // Recent Articles (excluding current)
   const recentArticles = allBlogs.filter((p) => p.id !== article.id).slice(0, 4);
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://jmt-pink.vercel.app';
+  const articleUrl = `${siteUrl}/blogs/${article.slug}`;
+
+  // Article JSON-LD Structured Data Schema for Google Search
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': articleUrl,
+    },
+    headline: article.title,
+    description: article.excerpt || article.title,
+    image: article.image?.startsWith('http') ? article.image : `${siteUrl}${article.image || '/hero-students.jpg'}`,
+    author: {
+      '@type': 'Person',
+      name: article.author || 'JMT Academic Team',
+    },
+    publisher: {
+      '@type': 'EducationalOrganization',
+      name: 'JMT Public Higher Secondary School & College',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteUrl}/hero-students.jpg`,
+      },
+    },
+    datePublished: article.created_at,
+    dateModified: article.updated_at || article.created_at,
+    articleSection: article.category || 'Education',
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: siteUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blogs',
+        item: `${siteUrl}/blogs`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: article.title,
+        item: articleUrl,
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
+      {/* Search Engine Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       {/* 1. Top Announcement & Header */}
       <TopBar onOpenEnroll={handleOpenEnroll} />
       <Navbar onOpenEnroll={handleOpenEnroll} />
