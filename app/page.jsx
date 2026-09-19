@@ -5,11 +5,11 @@ import TopBar from '../src/components/TopBar';
 import Navbar from '../src/components/Navbar';
 import Hero from '../src/components/Hero';
 import AboutSection from '../src/components/AboutSection';
-import AdmissionProcess from '../src/components/AdmissionProcess';
 import EligibilityAndFees from '../src/components/EligibilityAndFees';
 import WhyChooseUsGrid from '../src/components/WhyChooseUsGrid';
 import Testimonials from '../src/components/Testimonials';
 import VideoAndEnquiry from '../src/components/VideoAndEnquiry';
+import BlogPreviewSection from '../src/components/BlogPreviewSection';
 import FAQ from '../src/components/FAQ';
 import CtaBand from '../src/components/CtaBand';
 import Footer from '../src/components/Footer';
@@ -39,10 +39,7 @@ export default function HomePage() {
         {/* 4. About School & Academic Leadership Spotlight */}
         <AboutSection onOpenEnroll={handleOpenEnroll} />
 
-        {/* 6. 7-Step Admission Process Flow */}
-        <AdmissionProcess />
-
-        {/* 8. Eligibility Criteria & Fee Structure */}
+        {/* 5. Eligibility Criteria & Fee Structure */}
         <EligibilityAndFees />
 
         {/* 9. Why Choose JMT (School Features & Differentiators) */}
@@ -54,7 +51,10 @@ export default function HomePage() {
         {/* 11. Campus Video & Admission Enquiry Form */}
         <VideoAndEnquiry />
 
-        {/* 12. Frequently Asked Questions (FAQ) */}
+        {/* 12. Latest Blogs & Articles Preview */}
+        <BlogPreviewSection />
+
+        {/* 13. Frequently Asked Questions (FAQ) */}
         <FAQ />
 
         {/* 13. Pre-Footer Conversion CTA Band */}

@@ -13,24 +13,23 @@ import {
 
 export default function Footer() {
   const quickLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About Us', href: '#about' },
-    { name: 'Programs', href: '#classes' },
-    { name: 'Why JMT', href: '#why-us' },
-    { name: 'Admission Process', href: '#process' },
-    { name: 'Eligibility Criteria', href: '#eligibility' },
-    { name: 'Student Reviews', href: '#testimonials' },
-    { name: 'FAQ', href: '#faq' },
-    { name: 'Contact Us', href: '#contact' },
+    { name: 'Home', href: '/#home' },
+    { name: 'About Us', href: '/#about' },
+    { name: 'Eligibility Criteria', href: '/#eligibility' },
+    { name: 'Why Choose JMT', href: '/#why-us' },
+    { name: 'Student Reviews', href: '/#testimonials' },
+    { name: 'Latest Blogs', href: '/blogs' },
+    { name: 'FAQ', href: '/#faq' },
+    { name: 'Contact Us', href: '/#contact' },
   ];
 
   const programs = [
-    { name: 'Ziauddin Board (ZUEB)', href: '#classes' },
-    { name: 'Matric Board (SSC I & II)', href: '#classes' },
-    { name: 'Intermediate (FSC Pre-Med / Eng)', href: '#classes' },
-    { name: 'Commerce (I.Com)', href: '#classes' },
-    { name: 'General Science (ICS)', href: '#classes' },
-    { name: 'Combine Gap (SSC & HSSC)', href: '#eligibility' },
+    { name: 'Ziauddin Board (ZUEB)', href: '/#eligibility' },
+    { name: 'Matric Board (SSC I & II)', href: '/#eligibility' },
+    { name: 'Intermediate (FSC Pre-Med / Eng)', href: '/#eligibility' },
+    { name: 'Commerce (I.Com)', href: '/#eligibility' },
+    { name: 'General Science (ICS)', href: '/#eligibility' },
+    { name: 'Combine Gap (SSC & HSSC)', href: '/#eligibility' },
   ];
 
   return (

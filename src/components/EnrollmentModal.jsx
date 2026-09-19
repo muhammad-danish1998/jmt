@@ -145,13 +145,13 @@ export default function EnrollmentModal({ isOpen, onClose }) {
           </div>
           <div className="text-left">
             <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight leading-tight">
-              Beacon Academy
+              JMT Public School
             </h3>
             <div className="font-dancing text-lg sm:text-xl text-[#6335d8] font-bold leading-none mt-0.5">
-              &amp; College
+              &amp; College Karachi
             </div>
-            <p className="text-[11px] sm:text-xs text-slate-400 italic mt-0.5">
-              &ldquo;Play Group, Kindergarten, Matric, O-Level &amp; Inter&rdquo;
+            <p className="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5">
+              Ziauddin Examination Board (ZUEB) Admissions
             </p>
           </div>
         </div>

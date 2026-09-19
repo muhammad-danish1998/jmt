@@ -236,24 +236,18 @@ export default function RootLayout({ children }) {
           {
             '@type': 'ListItem',
             position: 2,
-            name: 'Admission Process',
-            item: `${SITE_URL}/#process`,
-          },
-          {
-            '@type': 'ListItem',
-            position: 3,
             name: 'Eligibility & Fee Structure',
             item: `${SITE_URL}/#eligibility`,
           },
           {
             '@type': 'ListItem',
-            position: 4,
+            position: 3,
             name: 'Frequently Asked Questions',
             item: `${SITE_URL}/#faq`,
           },
           {
             '@type': 'ListItem',
-            position: 5,
+            position: 4,
             name: 'Admission Enquiry',
             item: `${SITE_URL}/#enquiry`,
           },

@@ -7,11 +7,11 @@ export default function Navbar({ onOpenEnroll }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Process', href: '#process' },
-    { name: 'Eligibility', href: '#eligibility' },
-    { name: 'Contact us', href: '#contact' },
+    { name: 'Home', href: '/#home' },
+    { name: 'About', href: '/#about' },
+    { name: 'Eligibility', href: '/#eligibility' },
+    { name: 'Contact us', href: '/#contact' },
+    { name: 'Latest Blogs', href: '/blogs' },
   ];
 
   return (
