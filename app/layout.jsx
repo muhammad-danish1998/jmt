@@ -68,6 +68,9 @@ export const metadata = {
   alternates: {
     canonical: SITE_URL,
   },
+  verification: {
+    google: 'google47d8c8e1526eeabd',
+  },
   robots: {
     index: true,
     follow: true,
