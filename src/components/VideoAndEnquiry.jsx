@@ -88,16 +88,25 @@ export default function VideoAndEnquiry() {
             </div>
 
             {/* Video Player Container */}
-            <div className="relative rounded-2xl overflow-hidden bg-slate-900 aspect-video shadow-md border border-slate-200 group flex items-center justify-center flex-grow">
-              <img
-                src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1000&q=80"
-                alt="Campus Video Thumbnail"
-                className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500"
+            <div
+              onClick={() => setIsPlaying(true)}
+              className="relative rounded-2xl overflow-hidden bg-slate-900 aspect-video shadow-md border border-slate-200 group flex items-center justify-center flex-grow cursor-pointer"
+            >
+              <video
+                src="/video.mp4#t=0.5"
+                className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 group-hover:opacity-75 transition-all duration-500"
+                preload="metadata"
+                muted
+                playsInline
               />
 
               {/* Pulsing Play Button */}
               <button
-                onClick={() => setIsPlaying(true)}
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsPlaying(true);
+                }}
                 className="relative z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/90 group-hover:bg-white text-slate-900 flex items-center justify-center shadow-xl group-hover:scale-110 transition-all duration-300 focus:outline-none"
                 aria-label="Play Campus Tour Video"
               >
@@ -105,8 +114,8 @@ export default function VideoAndEnquiry() {
                 <Play className="w-8 h-8 sm:w-10 sm:h-10 fill-slate-900 translate-x-1" />
               </button>
 
-              <div className="absolute bottom-4 left-4 right-4 z-10 bg-slate-950/60 backdrop-blur-xs p-3 rounded-lg flex items-center justify-between text-white text-xs">
-                <span>Campus Tour • 3:45 mins</span>
+              <div className="absolute bottom-4 left-4 right-4 z-10 bg-slate-950/70 backdrop-blur-xs p-3 rounded-lg flex items-center justify-between text-white text-xs">
+                <span>Campus Tour Video</span>
                 <span className="font-semibold text-blue-300">Click to Watch in HD</span>
               </div>
             </div>
@@ -347,7 +356,7 @@ export default function VideoAndEnquiry() {
       {isPlaying && (
         <div
           onClick={() => setIsPlaying(false)}
-          className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
         >
           <div
             onClick={(e) => e.stopPropagation()}
@@ -355,19 +364,21 @@ export default function VideoAndEnquiry() {
           >
             <button
               onClick={() => setIsPlaying(false)}
-              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center transition-colors"
+              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center transition-colors shadow-md"
               aria-label="Close Video"
             >
               <X className="w-6 h-6" />
             </button>
-            <div className="aspect-video w-full">
-              <iframe
-                className="w-full h-full"
-                src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1"
-                title="JMT Public School & College Campus Tour"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+            <div className="aspect-video w-full bg-black flex items-center justify-center">
+              <video
+                className="w-full h-full object-contain"
+                src="/video.mp4"
+                controls
+                autoPlay
+                playsInline
+              >
+                Your browser does not support the video tag.
+              </video>
             </div>
           </div>
         </div>

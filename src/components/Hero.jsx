@@ -10,16 +10,19 @@ export default function Hero() {
   const slides = [
     {
       title: 'JMT School & College Campus',
+      alt: 'JMT Public Higher Secondary School & College Karachi - Ziauddin Board (ZUEB) Campus Infrastructure',
       subtitle: 'State-of-the-art infrastructure fostering quality education.',
       image: '/school.jpg',
     },
     {
       title: 'Academic Leadership & Excellence',
+      alt: 'Academic Leadership & Excellence - Ziauddin Examination Board Karachi',
       subtitle: 'Experienced administration committed to student career growth.',
       image: '/hm.jpg',
     },
     {
       title: 'Dedicated & Qualified Faculty',
+      alt: 'Dedicated & Qualified Faculty - Matric & Intermediate Programs Karachi',
       subtitle: 'Interactive learning environment shaping future leaders.',
       image: '/teacher.jpg',
     },
@@ -51,7 +54,7 @@ export default function Hero() {
                 <span className="text-blue-900">for 2026-27</span>
               </h1>
               <p className="text-2xl sm:text-3xl font-bold text-slate-700 tracking-tight">
-                Classes IX, X, XI & XII
+                Classes IX, X, XI & XII • Ziauddin Board (ZUEB)
               </p>
             </div>
 
@@ -105,7 +108,11 @@ export default function Hero() {
                 >
                   <img
                     src={slide.image}
-                    alt={slide.title}
+                    alt={slide.alt || slide.title}
+                    width={800}
+                    height={500}
+                    loading={idx === 0 ? 'eager' : 'lazy'}
+                    fetchPriority={idx === 0 ? 'high' : 'auto'}
                     className="w-full h-full object-cover"
                   />
                   {/* Gradient Overlay & Caption */}

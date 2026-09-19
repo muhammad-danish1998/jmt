@@ -1,9 +1,9 @@
 import Navbar from '../src/components/Navbar';
 import Hero from '../src/components/Hero';
-import WhyChooseUs from '../src/components/WhyChooseUs';
+import AdmissionProcess from '../src/components/AdmissionProcess';
 import ClassesWeOffer from '../src/components/ClassesWeOffer';
 import EligibilityAndFees from '../src/components/EligibilityAndFees';
-import CampusGallery from '../src/components/CampusGallery';
+import FAQ from '../src/components/FAQ';
 import VideoAndEnquiry from '../src/components/VideoAndEnquiry';
 import Footer from '../src/components/Footer';
 import ScrollToTop from '../src/components/ScrollToTop';
@@ -20,8 +20,8 @@ export default function HomePage() {
         {/* 2. Hero Section */}
         <Hero />
 
-        {/* 3. Why Choose Us (Features) */}
-        <WhyChooseUs />
+        {/* 3. Admission Process */}
+        <AdmissionProcess />
 
         {/* 4. Classes We Offer */}
         <ClassesWeOffer />
@@ -29,8 +29,8 @@ export default function HomePage() {
         {/* 5. Eligibility & Fee Structure */}
         <EligibilityAndFees />
 
-        {/* 6. Campus Gallery */}
-        <CampusGallery />
+        {/* 6. Frequently Asked Questions (FAQ) */}
+        <FAQ />
 
         {/* 7. Campus Video & Admission Enquiry Form */}
         <VideoAndEnquiry />
