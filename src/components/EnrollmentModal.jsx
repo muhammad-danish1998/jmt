@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   X,
   CheckCircle2,
@@ -8,27 +8,28 @@ import {
   Loader2,
   AlertCircle,
   Send,
-  User,
-  Phone,
-  Mail,
-  BookOpen,
+  CloudUpload,
   Calendar,
 } from 'lucide-react';
 
 export default function EnrollmentModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
-    studentName: '',
-    fatherName: '',
-    age: '',
-    classInterested: 'Class IX (SSC I)',
+    firstName: '',
+    lastName: '',
+    dob: '',
+    gender: '',
+    classProgram: '',
+    address: '',
     contactNumber: '',
     email: '',
-    message: '',
   });
 
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [photoPreview, setPhotoPreview] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const fileInputRef = useRef(null);
 
   if (!isOpen) return null;
 
@@ -37,12 +38,29 @@ export default function EnrollmentModal({ isOpen, onClose }) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handlePhotoChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedPhoto(file);
+      const previewUrl = URL.createObjectURL(file);
+      setPhotoPreview(previewUrl);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
 
-    if (!formData.studentName || !formData.contactNumber || !formData.classInterested) {
-      setErrorMessage('Please fill in all required fields (Student Name, Contact Number, and Class).');
+    if (
+      !formData.firstName.trim() ||
+      !formData.lastName.trim() ||
+      !formData.dob ||
+      !formData.gender ||
+      !formData.classProgram ||
+      !formData.address.trim() ||
+      !formData.contactNumber.trim()
+    ) {
+      setErrorMessage('Please fill in all required fields marked with (*)');
       return;
     }
 
@@ -53,20 +71,22 @@ export default function EnrollmentModal({ isOpen, onClose }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          studentName: formData.studentName,
-          parentName: formData.fatherName || formData.studentName,
-          age: formData.age,
-          classInterested: formData.classInterested,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          dob: formData.dob,
+          gender: formData.gender,
+          classProgram: formData.classProgram,
+          address: formData.address,
           contactNumber: formData.contactNumber,
           email: formData.email,
-          message: formData.message || 'Quick Enrollment Request via Modal',
+          photoName: selectedPhoto ? selectedPhoto.name : null,
         }),
       });
 
       const result = await res.json();
 
       if (!res.ok || !result.success) {
-        throw new Error(result.error || 'Failed to submit admission enquiry. Please try again.');
+        throw new Error(result.error || 'Failed to submit admission form to database. Please try again.');
       }
 
       setIsSubmitted(true);
@@ -81,14 +101,17 @@ export default function EnrollmentModal({ isOpen, onClose }) {
   const handleResetAndClose = () => {
     setIsSubmitted(false);
     setErrorMessage('');
+    setSelectedPhoto(null);
+    setPhotoPreview(null);
     setFormData({
-      studentName: '',
-      fatherName: '',
-      age: '',
-      classInterested: 'Class IX (SSC I)',
+      firstName: '',
+      lastName: '',
+      dob: '',
+      gender: '',
+      classProgram: '',
+      address: '',
       contactNumber: '',
       email: '',
-      message: '',
     });
     onClose();
   };
@@ -96,199 +119,261 @@ export default function EnrollmentModal({ isOpen, onClose }) {
   return (
     <div
       onClick={handleResetAndClose}
-      className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 overflow-y-auto animate-in fade-in duration-200"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative max-w-lg w-full bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden my-8 animate-in zoom-in-95 duration-200"
+        className="relative max-w-lg w-full bg-white rounded-[24px] sm:rounded-[28px] shadow-2xl p-5 sm:p-7 border border-slate-100 my-6 animate-in zoom-in-95 duration-200"
       >
-        {/* Header Banner */}
-        <div className="bg-gradient-to-r from-blue-900 to-slate-900 text-white p-6 relative">
-          <button
-            onClick={handleResetAndClose}
-            type="button"
-            className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors focus:outline-none"
-            aria-label="Close modal"
-          >
-            <X className="w-5 h-5" />
-          </button>
+        {/* Close Button */}
+        <button
+          onClick={handleResetAndClose}
+          type="button"
+          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100/90 hover:bg-slate-200 text-slate-400 hover:text-slate-700 flex items-center justify-center transition-colors focus:outline-none cursor-pointer"
+          aria-label="Close modal"
+        >
+          <X className="w-4 h-4" />
+        </button>
 
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-amber-400">
-              <GraduationCap className="w-7 h-7" />
+        {/* Modal Header */}
+        <div className="flex items-center gap-3.5 mb-5 pb-3">
+          <div className="relative">
+            <div className="w-14 h-14 sm:w-15 sm:h-15 rounded-full bg-gradient-to-br from-[#4323b6] via-[#6335d8] to-[#361a99] text-white flex items-center justify-center shadow-lg shadow-indigo-500/30">
+              <GraduationCap className="w-7 h-7 text-white" />
             </div>
-            <div>
-              <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
-                Admissions 2026–2027 Open
-              </span>
-              <h3 className="text-xl font-black text-white">
-                Apply for Admission
-              </h3>
-            </div>
+            <div className="absolute -inset-1 rounded-full bg-indigo-500/20 blur-sm -z-10" />
           </div>
-          <p className="text-xs text-slate-300 mt-2">
-            Complete the form below to register with <strong>Ziauddin Examination Board (ZUEB)</strong>.
-          </p>
+          <div className="text-left">
+            <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              Beacon Academy
+            </h3>
+            <div className="font-dancing text-lg sm:text-xl text-[#6335d8] font-bold leading-none mt-0.5">
+              &amp; College
+            </div>
+            <p className="text-[11px] sm:text-xs text-slate-400 italic mt-0.5">
+              &ldquo;Play Group, Kindergarten, Matric, O-Level &amp; Inter&rdquo;
+            </p>
+          </div>
         </div>
 
-        {/* Form Body */}
-        <div className="p-6">
-          {isSubmitted ? (
-            <div className="py-8 text-center space-y-4 animate-in fade-in">
-              <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-sm">
-                <CheckCircle2 className="w-10 h-10" />
+        {/* Form Body or Success Confirmation */}
+        {isSubmitted ? (
+          <div className="py-8 text-center space-y-4 animate-in fade-in">
+            <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-sm">
+              <CheckCircle2 className="w-10 h-10" />
+            </div>
+            <h4 className="text-2xl font-black text-slate-900">Admission Submitted!</h4>
+            <p className="text-xs sm:text-sm text-slate-600 max-w-sm mx-auto leading-relaxed">
+              Thank you, <strong className="text-slate-900">{formData.firstName} {formData.lastName}</strong>! Your application has been saved to our database. Our admission officer will contact you at{' '}
+              <strong className="text-slate-900">{formData.contactNumber}</strong> shortly.
+            </p>
+            <button
+              type="button"
+              onClick={handleResetAndClose}
+              className="mt-4 inline-flex items-center justify-center bg-[#4f27d8] hover:bg-[#3f1db8] text-white text-sm font-semibold px-7 py-2.5 rounded-full shadow-md transition-all cursor-pointer"
+            >
+              Done
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-3.5 text-left">
+            {errorMessage && (
+              <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-xl flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
+                <span>{errorMessage}</span>
               </div>
-              <h4 className="text-2xl font-black text-slate-900">Application Submitted!</h4>
-              <p className="text-sm text-slate-600 max-w-sm mx-auto leading-relaxed">
-                Thank you! Our admission officer will contact you at{' '}
-                <strong className="text-slate-900">{formData.contactNumber}</strong> shortly to guide you through the enrollment process.
-              </p>
+            )}
+
+            {/* Row 1: First Name & Last Name */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs font-bold text-slate-800 mb-1">
+                  First Name <span className="text-rose-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  placeholder="First Name"
+                  required
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-800 mb-1">
+                  Last Name <span className="text-rose-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  placeholder="Last Name"
+                  required
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Row 2: Date of Birth & Gender */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs font-bold text-slate-800 mb-1">
+                  Date of Birth <span className="text-rose-500">*</span>
+                </label>
+                <input
+                  type="date"
+                  name="dob"
+                  value={formData.dob}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all text-slate-700"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-800 mb-1">
+                  Gender <span className="text-rose-500">*</span>
+                </label>
+                <select
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all text-slate-700 font-medium"
+                >
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Row 3: Class / Program */}
+            <div>
+              <label className="block text-xs font-bold text-slate-800 mb-1">
+                Class / Program <span className="text-rose-500">*</span>
+              </label>
+              <select
+                name="classProgram"
+                value={formData.classProgram}
+                onChange={handleChange}
+                required
+                className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all text-slate-700 font-medium"
+              >
+                <option value="">Select Program</option>
+                <option value="Play Group / Kindergarten">Play Group / Kindergarten</option>
+                <option value="Primary & Middle Section">Primary &amp; Middle Section</option>
+                <option value="Class IX (SSC I) - Science">Class IX (SSC I) - Matric Science</option>
+                <option value="Class IX (SSC I) - General">Class IX (SSC I) - Matric General</option>
+                <option value="Class X (SSC II) - Science">Class X (SSC II) - Matric Science</option>
+                <option value="Class X (SSC II) - General">Class X (SSC II) - Matric General</option>
+                <option value="Class XI (HSSC I) - Pre-Medical">Class XI (HSSC I) - Pre-Medical</option>
+                <option value="Class XI (HSSC I) - Pre-Engineering">Class XI (HSSC I) - Pre-Engineering</option>
+                <option value="Class XI (HSSC I) - ICS (Computer Science)">Class XI (HSSC I) - ICS</option>
+                <option value="Class XI (HSSC I) - I.Com (Commerce)">Class XI (HSSC I) - I.Com</option>
+                <option value="Class XI (HSSC I) - Humanities / Arts">Class XI (HSSC I) - Humanities</option>
+                <option value="Class XII (HSSC II) - Intermediate">Class XII (HSSC II) - Intermediate</option>
+                <option value="Combine Gap Fast Track (SSC Part I & II)">Combine Gap Fast Track (SSC Part I &amp; II)</option>
+                <option value="Combine Gap Fast Track (HSSC Part I & II)">Combine Gap Fast Track (HSSC Part I &amp; II)</option>
+              </select>
+            </div>
+
+            {/* Row 4: Address */}
+            <div>
+              <label className="block text-xs font-bold text-slate-800 mb-1">
+                Address <span className="text-rose-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                placeholder="Your full address..."
+                required
+                className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
+              />
+            </div>
+
+            {/* Row 5: Contact Number & Email Address */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs font-bold text-slate-800 mb-1">
+                  Contact Number <span className="text-rose-500">*</span>
+                </label>
+                <input
+                  type="tel"
+                  name="contactNumber"
+                  value={formData.contactNumber}
+                  onChange={handleChange}
+                  placeholder="0300 0000000"
+                  required
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-800 mb-1">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="your@email.com"
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Row 6: Upload Student Photo */}
+            <div>
+              <label className="block text-xs font-bold text-slate-800 mb-1">
+                Upload Student Photo
+              </label>
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handlePhotoChange}
+                accept="image/*"
+                className="hidden"
+              />
               <button
                 type="button"
-                onClick={handleResetAndClose}
-                className="mt-4 inline-flex items-center justify-center bg-blue-900 hover:bg-blue-950 text-white text-sm font-semibold px-6 py-2.5 rounded-lg shadow-sm transition-all"
+                onClick={() => fileInputRef.current?.click()}
+                className="w-full py-2.5 px-4 bg-slate-50 hover:bg-slate-100 border border-dashed border-slate-300 rounded-xl text-xs text-slate-700 font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer"
               >
-                Done
+                <CloudUpload className="w-4 h-4 text-indigo-600" />
+                <span>{selectedPhoto ? selectedPhoto.name : 'Choose Photo'}</span>
               </button>
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {errorMessage && (
-                <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-lg flex items-center gap-2">
-                  <AlertCircle className="w-4 h-4 shrink-0" />
-                  <span>{errorMessage}</span>
-                </div>
+
+            {/* Submit Admission Button */}
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="btn-shine w-full mt-3 bg-gradient-to-r from-[#4f27d8] via-[#5c2eec] to-[#4320bf] hover:from-[#4320bf] hover:to-[#3816a8] text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-indigo-500/25 text-sm sm:text-base flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-[0.98] disabled:opacity-60"
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin text-white" />
+                  <span>Saving to Database...</span>
+                </>
+              ) : (
+                <>
+                  <Send className="w-4 h-4 fill-white -rotate-12" />
+                  <span>Submit Admission</span>
+                </>
               )}
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Student Full Name <span className="text-rose-500">*</span>
-                  </label>
-                  <div className="relative">
-                    <User className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-                    <input
-                      type="text"
-                      name="studentName"
-                      value={formData.studentName}
-                      onChange={handleChange}
-                      placeholder="e.g. Muhammad Ali"
-                      required
-                      className="w-full pl-9 pr-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Father / Guardian Name
-                  </label>
-                  <input
-                    type="text"
-                    name="fatherName"
-                    value={formData.fatherName}
-                    onChange={handleChange}
-                    placeholder="Father Name"
-                    className="w-full px-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Contact / WhatsApp Number <span className="text-rose-500">*</span>
-                  </label>
-                  <div className="relative">
-                    <Phone className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-                    <input
-                      type="tel"
-                      name="contactNumber"
-                      value={formData.contactNumber}
-                      onChange={handleChange}
-                      placeholder="0342-0000000"
-                      required
-                      className="w-full pl-9 pr-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Program / Class Interested <span className="text-rose-500">*</span>
-                  </label>
-                  <select
-                    name="classInterested"
-                    value={formData.classInterested}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900 font-medium"
-                  >
-                    <option value="Class IX (SSC I) - Science / General">Class IX (SSC I) - Matric</option>
-                    <option value="Class X (SSC II) - Science / General">Class X (SSC II) - Matric</option>
-                    <option value="Class XI (HSSC I) - Pre-Medical">Class XI (HSSC I) - Pre-Medical</option>
-                    <option value="Class XI (HSSC I) - Pre-Engineering">Class XI (HSSC I) - Pre-Engineering</option>
-                    <option value="Class XI (HSSC I) - ICS / Commerce / Arts">Class XI (HSSC I) - ICS / Commerce</option>
-                    <option value="Class XII (HSSC II) - Intermediate">Class XII (HSSC II) - Intermediate</option>
-                    <option value="Combine Gap (SSC Part I & II)">Combine Gap (SSC Part I & II)</option>
-                    <option value="Combine Gap (HSSC Part I & II)">Combine Gap (HSSC Part I & II)</option>
-                    <option value="Improvement / Additional Subject">Improvement / Additional Subject</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Email Address (Optional)
-                </label>
-                <div className="relative">
-                  <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="student@example.com"
-                    className="w-full pl-9 pr-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Additional Notes or Questions
-                </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows={2}
-                  placeholder="Write any previous board marks, gap years, or questions..."
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900 resize-none"
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full mt-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold py-3 px-4 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Submitting Application...</span>
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-4 h-4" />
-                    <span>Submit Admission Application</span>
-                  </>
-                )}
-              </button>
-            </form>
-          )}
-        </div>
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );
 }
+

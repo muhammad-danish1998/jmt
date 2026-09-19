@@ -4,12 +4,38 @@ import { getSupabase } from '../../../src/lib/supabase';
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { studentName, parentName, age, classInterested, contactNumber, email, message } = body;
+    const {
+      firstName,
+      lastName,
+      studentName,
+      parentName,
+      dob,
+      gender,
+      classInterested,
+      classProgram,
+      address,
+      contactNumber,
+      email,
+      photoName,
+      message,
+    } = body;
 
-    // Server-side Validation
-    if (!studentName || !classInterested || !contactNumber) {
+    // Resolve full student name
+    const resolvedName =
+      (firstName && lastName ? `${firstName.trim()} ${lastName.trim()}` : '') ||
+      (studentName ? studentName.trim() : '') ||
+      (firstName ? firstName.trim() : '');
+
+    const resolvedClass = classProgram || classInterested;
+    const resolvedContact = contactNumber ? contactNumber.trim() : '';
+
+    // Validation
+    if (!resolvedName || !resolvedContact || !resolvedClass) {
       return NextResponse.json(
-        { success: false, error: 'Please fill in all required fields (Student Name, Class, and Contact Number).' },
+        {
+          success: false,
+          error: 'Please fill in all required fields (Name, Class/Program, and Contact Number).',
+        },
         { status: 400 }
       );
     }
@@ -26,18 +52,27 @@ export async function POST(request) {
       );
     }
 
+    // Build comprehensive structured details string
+    const details = [];
+    if (address) details.push(`Address: ${address.trim()}`);
+    if (dob) details.push(`DOB: ${dob.trim()}`);
+    if (gender) details.push(`Gender: ${gender}`);
+    if (photoName) details.push(`Photo Uploaded: ${photoName}`);
+    if (message) details.push(`Notes: ${message.trim()}`);
+
+    const fullMessage = details.length > 0 ? details.join(' | ') : 'Online Admission Form Submission';
+
     // Insert into Supabase admission_enquiries table
     const { data, error } = await supabase
       .from('admission_enquiries')
       .insert([
         {
-          student_name: studentName.trim(),
-          parent_name: parentName ? parentName.trim() : null,
-          age: age ? parseInt(age, 10) || null : null,
-          class_interested: classInterested,
-          contact_number: contactNumber.trim(),
+          student_name: resolvedName,
+          parent_name: parentName ? parentName.trim() : (gender ? `Gender: ${gender}` : null),
+          class_interested: resolvedClass,
+          contact_number: resolvedContact,
           email: email ? email.trim() : null,
-          message: message ? message.trim() : null,
+          message: fullMessage,
           created_at: new Date().toISOString(),
         },
       ]);
@@ -45,7 +80,7 @@ export async function POST(request) {
     if (error) {
       console.error('Supabase Insertion Error:', error);
       return NextResponse.json(
-        { success: false, error: error.message || 'Failed to submit admission enquiry to database.' },
+        { success: false, error: error.message || 'Failed to submit admission to database.' },
         { status: 500 }
       );
     }
@@ -53,7 +88,7 @@ export async function POST(request) {
     return NextResponse.json(
       {
         success: true,
-        message: 'Thank you! Your admission enquiry has been submitted successfully.',
+        message: 'Thank you! Your admission application has been submitted successfully.',
         data,
       },
       { status: 200 }
@@ -66,3 +101,4 @@ export async function POST(request) {
     );
   }
 }
+
