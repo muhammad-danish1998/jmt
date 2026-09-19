@@ -6,7 +6,6 @@ import Navbar from '../src/components/Navbar';
 import Hero from '../src/components/Hero';
 import AboutSection from '../src/components/AboutSection';
 import AdmissionProcess from '../src/components/AdmissionProcess';
-import ClassesWeOffer from '../src/components/ClassesWeOffer';
 import EligibilityAndFees from '../src/components/EligibilityAndFees';
 import WhyChooseUsGrid from '../src/components/WhyChooseUsGrid';
 import Testimonials from '../src/components/Testimonials';
@@ -42,9 +41,6 @@ export default function HomePage() {
 
         {/* 6. 7-Step Admission Process Flow */}
         <AdmissionProcess />
-
-        {/* 7. Classes & Academic Programs Grid */}
-        <ClassesWeOffer onOpenEnroll={handleOpenEnroll} />
 
         {/* 8. Eligibility Criteria & Fee Structure */}
         <EligibilityAndFees />

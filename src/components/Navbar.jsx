@@ -9,7 +9,6 @@ export default function Navbar({ onOpenEnroll }) {
   const navLinks = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
-    { name: 'Programs', href: '#classes' },
     { name: 'Process', href: '#process' },
     { name: 'Eligibility', href: '#eligibility' },
     { name: 'Contact us', href: '#contact' },
