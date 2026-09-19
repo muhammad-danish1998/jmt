@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import TopBar from '../src/components/TopBar';
 import Navbar from '../src/components/Navbar';
 import Hero from '../src/components/Hero';
-import StatsCounter from '../src/components/StatsCounter';
 import AboutSection from '../src/components/AboutSection';
 import AdmissionProcess from '../src/components/AdmissionProcess';
 import ClassesWeOffer from '../src/components/ClassesWeOffer';
@@ -38,10 +37,7 @@ export default function HomePage() {
         {/* 3. Hero Section with Floating Trust Badges & Stats */}
         <Hero onOpenEnroll={handleOpenEnroll} />
 
-        {/* 4. Key Metrics & Statistics Strip */}
-        <StatsCounter />
-
-        {/* 5. About School & Academic Leadership Spotlight */}
+        {/* 4. About School & Academic Leadership Spotlight */}
         <AboutSection onOpenEnroll={handleOpenEnroll} />
 
         {/* 6. 7-Step Admission Process Flow */}
