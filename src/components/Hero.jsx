@@ -114,35 +114,44 @@ export default function Hero({ onOpenEnroll }) {
 
           </div>
 
-          {/* Right Column: Visual Showcase Frame with Corner Brackets & 3 Floating Cards */}
-          <div className="lg:col-span-6 relative pt-6 sm:pt-10 lg:pt-0">
-            <div className="relative mx-auto max-w-md lg:max-w-[480px]">
+          {/* Right Column: Visual Showcase Frame with Premium Glowing Border & Floating Cards */}
+          <div className="lg:col-span-6 relative pt-8 sm:pt-12 lg:pt-0">
+            <div className="relative mx-auto max-w-lg lg:max-w-[560px] xl:max-w-[590px]">
               
-              {/* Image Frame Container with Golden Corner Bracket Accents */}
-              <div className="relative p-2.5">
+              {/* Outer Ambient Glow Aura */}
+              <div className="absolute -inset-2 bg-gradient-to-r from-amber-400/25 via-purple-500/30 to-indigo-500/30 rounded-[36px] blur-2xl opacity-75 group-hover:opacity-100 transition duration-1000 animate-pulse pointer-events-none" />
+
+              {/* Glassmorphic Multi-layered Border Frame */}
+              <div className="relative p-2.5 sm:p-3 rounded-[28px] sm:rounded-[34px] bg-gradient-to-b from-white/15 via-white/5 to-white/10 backdrop-blur-xl border-2 border-white/25 shadow-2xl shadow-purple-950/80">
+                
+                {/* Golden Corner Bracket Accents */}
                 <div className="corner-bracket corner-bracket-tl" />
                 <div className="corner-bracket corner-bracket-tr" />
                 <div className="corner-bracket corner-bracket-bl" />
                 <div className="corner-bracket corner-bracket-br" />
 
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-400/40 bg-slate-900 aspect-[4/3] group">
+                {/* Inner Image Container */}
+                <div className="relative rounded-[20px] sm:rounded-[26px] overflow-hidden shadow-inner border border-amber-400/40 bg-slate-950 aspect-[16/11] sm:aspect-[4/3] group">
                   <img
                     src="/hero-students.jpg"
                     alt="JMT Public Higher Secondary School & College Karachi - Ziauddin Board (ZUEB) Students"
-                    width={800}
-                    height={600}
+                    width={900}
+                    height={675}
                     fetchPriority="high"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-105 contrast-[1.02]"
                   />
 
+                  {/* Top-Edge Subtle Shimmer Line */}
+                  <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+
                   {/* Inside-Image Bottom Right Badge */}
-                  <div className="absolute bottom-3 right-3 bg-slate-950/85 backdrop-blur-md border border-amber-400/50 rounded-xl px-3 py-2 flex items-center gap-2 text-white shadow-lg">
-                    <div className="w-6 h-6 rounded-md bg-amber-400/20 text-amber-400 flex items-center justify-center">
+                  <div className="absolute bottom-3.5 right-3.5 bg-slate-950/90 backdrop-blur-md border border-amber-400/60 rounded-xl px-3.5 py-2 flex items-center gap-2.5 text-white shadow-xl">
+                    <div className="w-7 h-7 rounded-lg bg-amber-400/25 text-amber-400 flex items-center justify-center border border-amber-400/40">
                       <Award className="w-4 h-4" />
                     </div>
                     <div className="text-[11px] font-bold leading-tight text-left">
-                      <span>Zia Uddin Board</span><br />
-                      <span className="text-amber-300 font-normal text-[10px]">Certified Academy</span>
+                      <span className="text-white font-extrabold">Zia Uddin Board</span><br />
+                      <span className="text-amber-300 font-medium text-[10px]">Certified Academy</span>
                     </div>
                   </div>
                 </div>
