@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 @theme {
+  --font-sans: var(--font-jakarta), system-ui, -apple-system, sans-serif;
   --color-primary: #1e3a8a;
-  --color-secondary: #0f172a;
+  --color-primary-dark: #0f172a;
   --color-accent: #f59e0b;
+  --color-accent-hover: #d97706;
 }
 
 html {
@@ -11,5 +13,91 @@ html {
 }
 
 body {
-  @apply bg-slate-50 text-slate-800 antialiased;
+  font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+  @apply bg-slate-50 text-slate-800 antialiased selection:bg-blue-900 selection:text-white;
+}
+
+/* Background Dots Pattern */
+.bg-dots-pattern {
+  background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Custom Floating Animations */
+@keyframes floatSlow1 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+
+@keyframes floatSlow2 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(8px) rotate(-1deg); }
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.animate-float-1 {
+  animation: floatSlow1 4s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: floatSlow2 5s ease-in-out infinite;
+}
+
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-20deg);
+  animation: shine 3.5s infinite;
+}
+
+/* Corner bracket marks for image frames */
+.corner-bracket {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: #f59e0b;
+  pointer-events: none;
+  z-index: 20;
+}
+.corner-bracket-tl {
+  top: -8px;
+  left: -8px;
+  border-top-width: 3px;
+  border-left-width: 3px;
+  border-top-left-radius: 8px;
+}
+.corner-bracket-tr {
+  top: -8px;
+  right: -8px;
+  border-top-width: 3px;
+  border-right-width: 3px;
+  border-top-right-radius: 8px;
+}
+.corner-bracket-bl {
+  bottom: -8px;
+  left: -8px;
+  border-bottom-width: 3px;
+  border-left-width: 3px;
+  border-bottom-left-radius: 8px;
+}
+.corner-bracket-br {
+  bottom: -8px;
+  right: -8px;
+  border-bottom-width: 3px;
+  border-right-width: 3px;
+  border-bottom-right-radius: 8px;
 }

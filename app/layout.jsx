@@ -1,10 +1,11 @@
 import './globals.css';
-import { Inter } from 'next/font/google';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 
-const inter = Inter({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-jakarta',
 });
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://jmt-pink.vercel.app';
@@ -261,7 +262,7 @@ export default function RootLayout({ children }) {
   };
 
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
+    <html lang="en" className={jakarta.variable} suppressHydrationWarning>
       <body
         className="font-sans antialiased bg-slate-50 text-slate-900 selection:bg-blue-900 selection:text-white"
         suppressHydrationWarning

@@ -67,7 +67,7 @@ export default function AdmissionProcess() {
   ];
 
   return (
-    <section id="about" className="py-16 lg:py-24 bg-slate-50 border-b border-slate-200 relative overflow-hidden">
+    <section id="process" className="py-16 lg:py-24 bg-slate-50 border-b border-slate-200 relative overflow-hidden scroll-mt-20">
       {/* Subtle Background Accent Elements */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none overflow-hidden">
         <div className="absolute -top-24 right-10 w-96 h-96 bg-blue-100/50 rounded-full blur-3xl" />

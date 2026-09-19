@@ -3,13 +3,13 @@
 import React from 'react';
 import {
   GraduationCap,
-  Users2,
-  FileCheck2,
-  BadgePercent,
+  Users,
+  FileText,
+  Banknote,
   TrendingUp,
   Target,
-  Sparkles,
   ArrowRight,
+  Zap,
 } from 'lucide-react';
 
 export default function WhyChooseUsGrid({ onOpenEnroll }) {
@@ -17,106 +17,101 @@ export default function WhyChooseUsGrid({ onOpenEnroll }) {
     {
       icon: GraduationCap,
       title: 'Experienced Faculty',
-      description: 'Qualified subject specialists and dedicated educators with proven mentoring track records.',
-      tag: 'Faculty',
-      color: 'bg-blue-50 text-blue-900 border-blue-200',
+      description: 'Highly qualified teachers dedicated to student success and concept building.',
+      iconBg: 'bg-purple-600 text-white',
+      cardBorder: 'hover:border-purple-300',
     },
     {
-      icon: Users2,
+      icon: Users,
       title: 'Small Batch Classes',
-      description: 'Limited students per class to ensure personalized attention and clear concept building.',
-      tag: 'Batches',
-      color: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+      description: 'Limited students per class to ensure individual attention and better understanding.',
+      iconBg: 'bg-emerald-600 text-white',
+      cardBorder: 'hover:border-emerald-300',
     },
     {
-      icon: FileCheck2,
+      icon: FileText,
       title: 'Board Exam Focus',
-      description: 'Specialized syllabus coverage, model papers, and rigorous board examination practice.',
-      tag: 'ZUEB',
-      color: 'bg-indigo-50 text-indigo-900 border-indigo-200',
+      description: 'Special preparation for Ziauddin Board with model past papers and mock tests.',
+      iconBg: 'bg-blue-600 text-white',
+      cardBorder: 'hover:border-blue-300',
     },
     {
-      icon: BadgePercent,
-      title: 'Affordable Fee Plan',
-      description: 'Student-friendly and transparent installment options designed for family convenience.',
-      tag: 'Pricing',
-      color: 'bg-amber-50 text-amber-900 border-amber-200',
+      icon: Banknote,
+      title: 'Affordable Fees',
+      description: 'Quality education at reasonable and student-friendly installment fee structure.',
+      iconBg: 'bg-amber-500 text-slate-950',
+      cardBorder: 'hover:border-amber-300',
     },
     {
       icon: TrendingUp,
-      title: 'Regular Mock Tests',
-      description: 'Weekly and monthly assessment tests to monitor student progress and improve exam speed.',
-      tag: 'Tests',
-      color: 'bg-rose-50 text-rose-800 border-rose-200',
+      title: 'Regular Tests',
+      description: 'Weekly and monthly assessments to track student progress and exam speed.',
+      iconBg: 'bg-rose-500 text-white',
+      cardBorder: 'hover:border-rose-300',
     },
     {
       icon: Target,
-      title: 'Personalized Guidance',
-      description: 'Tailored academic counseling for entrance exams, gap recovery, and career pathways.',
-      tag: 'Counseling',
-      color: 'bg-cyan-50 text-cyan-900 border-cyan-200',
+      title: 'Personalized Attention',
+      description: 'Customized guidance and academic counseling tailored to each student’s needs.',
+      iconBg: 'bg-cyan-600 text-white',
+      cardBorder: 'hover:border-cyan-300',
     },
   ];
 
   return (
-    <section id="why-us" className="py-16 lg:py-24 bg-slate-50 border-b border-slate-200 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="why-us" className="py-16 lg:py-24 bg-[#070b19] text-white relative overflow-hidden border-b border-slate-800">
+      {/* Ambient Background Orbs */}
+      <div className="absolute top-10 right-10 w-96 h-96 bg-purple-600/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 bg-dots-pattern opacity-10 pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-900 text-xs font-bold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5 text-blue-900" />
-            <span>Why Choose JMT</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Why Study at <span className="text-blue-900">JMT School &amp; College?</span>
+        {/* Intro Section */}
+        <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
+          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-amber-300 text-xs font-bold uppercase tracking-wider">
+            <Zap className="w-3.5 h-3.5 text-amber-400" />
+            <span>Why Choose Us</span>
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+            Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-200">JMT?</span>
           </h2>
-          <div className="w-16 h-1 bg-blue-900 mx-auto rounded-full"></div>
-          <p className="text-slate-600 text-base sm:text-lg">
-            Empowering students with structured Ziauddin Board curriculum, individual mentorship, and career-driven academic excellence.
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            At JMT Public Higher Secondary School &amp; College, we provide quality education with a student-centered approach, following Ziauddin Board standards. Our programs focus on academic excellence and prepare students for admission processes — ensuring they are confident, capable, and ready to succeed.
           </p>
+          <div className="pt-2">
+            <button
+              type="button"
+              onClick={onOpenEnroll}
+              className="btn-shine inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-bold px-7 py-3 rounded-full shadow-lg transition-all duration-200 active:scale-95 text-sm cursor-pointer"
+            >
+              <span>Discover More</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
-        {/* 6-Card Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {features.map((feature, idx) => {
-            const Icon = feature.icon;
+        {/* 6 Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((item, idx) => {
+            const Icon = item.icon;
             return (
               <div
                 key={idx}
-                className="bg-white rounded-2xl p-7 border border-slate-200 shadow-xs hover:shadow-md hover:border-blue-200 transition-all duration-300 group flex flex-col justify-between"
+                className={`bg-white/5 backdrop-blur-md rounded-2xl p-6 sm:p-7 border border-white/10 transition-all duration-300 flex items-start gap-4 group ${item.cardBorder}`}
               >
-                <div>
-                  <div className="flex items-center justify-between mb-5">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center border shadow-xs transition-transform duration-300 group-hover:scale-110 ${feature.color}`}>
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">
-                      {feature.tag}
-                    </span>
-                  </div>
-
-                  <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-900 transition-colors">
-                    {feature.title}
-                  </h3>
-
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    {feature.description}
-                  </p>
+                <div
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-md transition-transform duration-300 group-hover:scale-110 ${item.iconBg}`}
+                >
+                  <Icon className="w-6 h-6" />
                 </div>
-
-                <div className="pt-5 mt-4 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-xs font-semibold text-slate-400">
-                    Feature 0{idx + 1}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={onOpenEnroll}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-blue-900 hover:text-blue-950 cursor-pointer"
-                  >
-                    <span>Inquire</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
+                <div>
+                  <h4 className="text-base sm:text-lg font-bold text-white mb-1.5 group-hover:text-amber-300 transition-colors">
+                    {item.title}
+                  </h4>
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
               </div>
             );

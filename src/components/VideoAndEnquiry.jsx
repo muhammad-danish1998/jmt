@@ -1,7 +1,22 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Play, Send, CheckCircle2, Video, Sparkles, X, Loader2, AlertCircle } from 'lucide-react';
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  Send,
+  Play,
+  X,
+  CheckCircle2,
+  AlertCircle,
+  Loader2,
+  ExternalLink,
+  Video,
+  User,
+  MessageSquare,
+} from 'lucide-react';
 
 export default function VideoAndEnquiry() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -11,8 +26,7 @@ export default function VideoAndEnquiry() {
   const [formData, setFormData] = useState({
     studentName: '',
     fatherName: '',
-    age: '',
-    classInterested: '',
+    classInterested: 'Class IX (SSC I)',
     contactNumber: '',
     email: '',
     message: '',
@@ -27,8 +41,8 @@ export default function VideoAndEnquiry() {
     e.preventDefault();
     setErrorMessage('');
 
-    if (!formData.studentName || !formData.contactNumber || !formData.classInterested) {
-      setErrorMessage('Please fill out the required fields (Student Name, Contact Number, and Class).');
+    if (!formData.studentName || !formData.contactNumber) {
+      setErrorMessage('Please fill out your Name and Contact Number.');
       return;
     }
 
@@ -37,13 +51,10 @@ export default function VideoAndEnquiry() {
     try {
       const response = await fetch('/api/enquiry', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           studentName: formData.studentName,
           parentName: formData.fatherName || formData.studentName,
-          age: formData.age,
           classInterested: formData.classInterested,
           contactNumber: formData.contactNumber,
           email: formData.email,
@@ -67,30 +78,90 @@ export default function VideoAndEnquiry() {
   };
 
   return (
-    <section id="enquiry" className="py-16 lg:py-24 bg-slate-50 border-b border-slate-200">
+    <section id="contact" className="py-16 lg:py-24 bg-slate-50 border-b border-slate-200 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* 2-Column Split: Campus Video (Left) & Enquiry Form (Right) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
+        {/* Section Head */}
+        <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+          <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-indigo-700">
+            <Mail className="w-4 h-4" />
+            <span>Get In Touch</span>
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Contact Us &amp; Find Our Campus
+          </h2>
+          <div className="w-16 h-1 bg-blue-900 mx-auto rounded-full"></div>
+          <p className="text-slate-600 text-sm sm:text-base italic">
+            "We'd love to hear from you. Reach out for admissions, programs, or any enquiries — our team responds promptly."
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
-          {/* LEFT: Watch Our Campus Video */}
-          <div className="lg:col-span-6 flex flex-col justify-between space-y-6">
-            <div>
-              <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
-                <Video className="w-6 h-6 text-blue-900" />
-                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900">
-                  Watch Our Campus Video
-                </h3>
+          {/* LEFT: 4 Info Cards + Google Map + Campus Video Walkthrough */}
+          <div className="lg:col-span-6 space-y-6">
+            
+            {/* 4 Info Cards matching Reference Site */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              
+              {/* Info Card 1: Address (Purple) */}
+              <div className="bg-white rounded-2xl p-4.5 border border-slate-200 shadow-xs flex items-start gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <strong className="text-xs font-bold text-slate-900 block">Our Address</strong>
+                  <span className="text-xs text-slate-600 leading-snug">
+                    House 381, Street 9, Qazzafi Town, Quaidabad, Bin Qasim, Malir, Karachi
+                  </span>
+                </div>
               </div>
-              <p className="mt-3 text-slate-600 text-sm sm:text-base">
-                Take a 2-minute virtual walkthrough of our academic wings, science labs, libraries, and athletic arenas.
-              </p>
+
+              {/* Info Card 2: Call Us (Green) */}
+              <div className="bg-white rounded-2xl p-4.5 border border-slate-200 shadow-xs flex items-start gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <div>
+                  <strong className="text-xs font-bold text-slate-900 block">Call Us</strong>
+                  <a href="tel:03424049132" className="text-xs text-slate-700 hover:text-blue-900 font-bold block mt-0.5">
+                    0342-4049132
+                  </a>
+                </div>
+              </div>
+
+              {/* Info Card 3: Email Us (Amber) */}
+              <div className="bg-white rounded-2xl p-4.5 border border-slate-200 shadow-xs flex items-start gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div>
+                  <strong className="text-xs font-bold text-slate-900 block">Email Us</strong>
+                  <a href="mailto:danishbrothers1998@gmail.com" className="text-xs text-slate-600 hover:text-blue-900 block break-all mt-0.5">
+                    danishbrothers1998@gmail.com
+                  </a>
+                </div>
+              </div>
+
+              {/* Info Card 4: Office Hours (Pink) */}
+              <div className="bg-white rounded-2xl p-4.5 border border-slate-200 shadow-xs flex items-start gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center shrink-0">
+                  <Clock className="w-5 h-5" />
+                </div>
+                <div>
+                  <strong className="text-xs font-bold text-slate-900 block">Office Hours</strong>
+                  <span className="text-xs text-slate-600 block mt-0.5">
+                    Mon - Sat: 9:00 AM - 5:00 PM
+                  </span>
+                </div>
+              </div>
+
             </div>
 
-            {/* Video Player Container */}
+            {/* Campus Video Player Preview */}
             <div
               onClick={() => setIsPlaying(true)}
-              className="relative rounded-2xl overflow-hidden bg-slate-900 aspect-video shadow-md border border-slate-200 group flex items-center justify-center flex-grow cursor-pointer"
+              className="relative rounded-2xl overflow-hidden bg-slate-950 aspect-video shadow-md border border-slate-200 group flex items-center justify-center cursor-pointer"
             >
               <video
                 src="/video.mp4#t=0.5"
@@ -100,57 +171,72 @@ export default function VideoAndEnquiry() {
                 playsInline
               />
 
-              {/* Pulsing Play Button */}
               <button
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
                   setIsPlaying(true);
                 }}
-                className="relative z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/90 group-hover:bg-white text-slate-900 flex items-center justify-center shadow-xl group-hover:scale-110 transition-all duration-300 focus:outline-none"
+                className="relative z-10 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 group-hover:bg-white text-slate-900 flex items-center justify-center shadow-xl group-hover:scale-110 transition-all duration-300 focus:outline-none"
                 aria-label="Play Campus Tour Video"
               >
                 <div className="absolute inset-0 rounded-full bg-white/40 animate-ping"></div>
-                <Play className="w-8 h-8 sm:w-10 sm:h-10 fill-slate-900 translate-x-1" />
+                <Play className="w-7 h-7 sm:w-8 sm:h-8 fill-slate-900 translate-x-0.5" />
               </button>
 
-              <div className="absolute bottom-4 left-4 right-4 z-10 bg-slate-950/70 backdrop-blur-xs p-3 rounded-lg flex items-center justify-between text-white text-xs">
-                <span>Campus Tour Video</span>
-                <span className="font-semibold text-blue-300">Click to Watch in HD</span>
+              <div className="absolute bottom-3 left-3 right-3 z-10 bg-slate-950/75 backdrop-blur-xs p-2.5 rounded-lg flex items-center justify-between text-white text-xs">
+                <span className="flex items-center gap-1.5">
+                  <Video className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Campus Video Walkthrough</span>
+                </span>
+                <span className="font-bold text-blue-300">Click to Watch in HD</span>
               </div>
             </div>
 
-            {/* Feature Note */}
-            <div className="p-4 bg-white rounded-xl border border-slate-200 shadow-xs flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-900 flex items-center justify-center shrink-0">
-                <Sparkles className="w-5 h-5" />
-              </div>
-              <p className="text-xs text-slate-600">
-                <span className="font-bold text-slate-900">Want an in-person tour?</span> Visit our campus from Monday to Saturday between 9:00 AM and 4:00 PM.
-              </p>
+            {/* Google Map Embed */}
+            <div className="relative rounded-2xl overflow-hidden bg-slate-200 border border-slate-300 h-52 w-full shadow-inner group">
+              <iframe
+                title="JMT School Campus Location Map"
+                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3314.024309388065!2d67.22149307537047!3d24.848751977936953!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjTCsDUwJzU1LjUiTiA2N8KwMTMnMjYuNiJF!5e1!3m2!1sen!2s!4v1788024660199!5m2!1sen!2s"
+                className="w-full h-full border-0"
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              ></iframe>
+              <a
+                href="https://maps.google.com/?q=24.848751977936953,67.22149307537047"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-3 right-3 bg-white/95 text-slate-900 text-xs font-bold px-3 py-1.5 rounded-lg shadow-md flex items-center gap-1.5 hover:bg-white"
+              >
+                <span>Get Directions</span>
+                <ExternalLink className="w-3 h-3 text-blue-700" />
+              </a>
             </div>
+
           </div>
 
-          {/* RIGHT: Admission Enquiry Form */}
-          <div className="lg:col-span-6 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs flex flex-col justify-between">
+          {/* RIGHT: Contact Form matching Reference Site */}
+          <div className="lg:col-span-6 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm flex flex-col justify-between">
             <div>
-              <div className="pb-3 border-b border-slate-100">
-                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900">
-                  Admission Enquiry Form
+              <div className="pb-4 border-b border-slate-100">
+                <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-indigo-700">
+                  <Send className="w-3.5 h-3.5" />
+                  <span>Send Us a Message</span>
+                </span>
+                <h3 className="text-2xl font-black text-slate-900 mt-1">
+                  We Reply Within 24 Hours
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                  Fill out the form below and our admissions counsellor will get back to you within 24 hours.
-                </p>
               </div>
 
               {isSubmitted ? (
                 <div className="py-12 text-center space-y-4 animate-in fade-in">
-                  <div className="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto">
+                  <div className="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto shadow-sm">
                     <CheckCircle2 className="w-10 h-10" />
                   </div>
-                  <h4 className="text-2xl font-bold text-slate-900">Enquiry Submitted!</h4>
-                  <p className="text-sm text-slate-600 max-w-sm mx-auto">
-                    Thank you for showing interest in JMT Public Higher Secondary School & College. Our counsellor will reach out to <strong className="text-slate-900">{formData.contactNumber}</strong> shortly.
+                  <h4 className="text-2xl font-black text-slate-900">Enquiry Submitted!</h4>
+                  <p className="text-sm text-slate-600 max-w-sm mx-auto leading-relaxed">
+                    Thank you! Our admission counsellor will reach out to <strong className="text-slate-900">{formData.contactNumber}</strong> shortly.
                   </p>
                   <button
                     onClick={() => {
@@ -158,191 +244,136 @@ export default function VideoAndEnquiry() {
                       setFormData({
                         studentName: '',
                         fatherName: '',
-                        age: '',
-                        classInterested: '',
+                        classInterested: 'Class IX (SSC I)',
                         contactNumber: '',
                         email: '',
                         message: '',
                       });
                     }}
-                    className="inline-block text-xs font-semibold text-blue-900 underline hover:text-blue-950"
+                    className="inline-block text-xs font-bold text-blue-900 underline hover:text-blue-950 mt-2"
                   >
-                    Submit another enquiry
+                    Submit another message
                   </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="mt-6 space-y-4">
                   {errorMessage && (
-                    <div className="p-3.5 bg-rose-50 border border-rose-200 text-rose-800 rounded-lg text-xs sm:text-sm flex items-start gap-2 animate-in fade-in">
-                      <AlertCircle className="w-4 h-4 text-rose-600 mt-0.5 shrink-0" />
+                    <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-lg flex items-center gap-2">
+                      <AlertCircle className="w-4 h-4 shrink-0" />
                       <span>{errorMessage}</span>
                     </div>
                   )}
 
-                  {/* Row 1: Student Name & Father's Name */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="studentName" className="block text-xs font-semibold text-slate-700 mb-1.5">
-                        Student Name <span className="text-rose-500">*</span>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        Full Name <span className="text-rose-500">*</span>
                       </label>
-                      <input
-                        type="text"
-                        id="studentName"
-                        name="studentName"
-                        value={formData.studentName}
-                        onChange={handleChange}
-                        placeholder="e.g. John Doe"
-                        required
-                        className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm text-slate-900 transition-colors placeholder:text-slate-400 bg-white"
-                      />
+                      <div className="relative">
+                        <User className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                        <input
+                          type="text"
+                          name="studentName"
+                          value={formData.studentName}
+                          onChange={handleChange}
+                          placeholder="e.g. Ahmed Ali"
+                          required
+                          className="w-full pl-9 pr-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900"
+                        />
+                      </div>
                     </div>
+
                     <div>
-                      <label htmlFor="fatherName" className="block text-xs font-semibold text-slate-700 mb-1.5">
-                        Father's Name
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        Email Address
                       </label>
-                      <input
-                        type="text"
-                        id="fatherName"
-                        name="fatherName"
-                        value={formData.fatherName}
-                        onChange={handleChange}
-                        placeholder="e.g. Robert Doe"
-                        className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm text-slate-900 transition-colors placeholder:text-slate-400 bg-white"
-                      />
+                      <div className="relative">
+                        <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="your@email.com"
+                          className="w-full pl-9 pr-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900"
+                        />
+                      </div>
                     </div>
                   </div>
 
-                  {/* Row 2: Age & Class Interested In */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="age" className="block text-xs font-semibold text-slate-700 mb-1.5">
-                        Age
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        Phone Number <span className="text-rose-500">*</span>
                       </label>
-                      <input
-                        type="number"
-                        id="age"
-                        name="age"
-                        value={formData.age}
-                        onChange={handleChange}
-                        placeholder="e.g. 14"
-                        min="10"
-                        max="22"
-                        className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm text-slate-900 transition-colors placeholder:text-slate-400 bg-white"
-                      />
+                      <div className="relative">
+                        <Phone className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                        <input
+                          type="tel"
+                          name="contactNumber"
+                          value={formData.contactNumber}
+                          onChange={handleChange}
+                          placeholder="0300 0000000"
+                          required
+                          className="w-full pl-9 pr-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900"
+                        />
+                      </div>
                     </div>
+
                     <div>
-                      <label htmlFor="classInterested" className="block text-xs font-semibold text-slate-700 mb-1.5">
-                        Class Interested In <span className="text-rose-500">*</span>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        Class Interested
                       </label>
                       <select
-                        id="classInterested"
                         name="classInterested"
                         value={formData.classInterested}
                         onChange={handleChange}
-                        required
-                        className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm text-slate-900 transition-colors bg-white"
+                        className="w-full px-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900 font-medium"
                       >
-                        <option value="">Select Class / Group</option>
-                        <optgroup label="Class IX">
-                          <option value="Class IX - Science Group">Class IX - Science Group</option>
-                          <option value="Class IX - Computer Science Group">Class IX - Computer Science Group</option>
-                          <option value="Class IX - General Group">Class IX - General Group</option>
-                        </optgroup>
-                        <optgroup label="Class X">
-                          <option value="Class X - Science Group">Class X - Science Group</option>
-                          <option value="Class X - Computer Science Group">Class X - Computer Science Group</option>
-                          <option value="Class X - General Group">Class X - General Group</option>
-                        </optgroup>
-                        <optgroup label="Class XI">
-                          <option value="Class XI - Pre-Medical">Class XI - Pre-Medical</option>
-                          <option value="Class XI - Pre-Engineering">Class XI - Pre-Engineering</option>
-                          <option value="Class XI - General Science">Class XI - General Science</option>
-                          <option value="Class XI - Commerce">Class XI - Commerce</option>
-                          <option value="Class XI - Humanities">Class XI - Humanities</option>
-                          <option value="Class XI - Medical Technology">Class XI - Medical Technology</option>
-                          <option value="Class XI - Pre-Nursing">Class XI - Pre-Nursing</option>
-                        </optgroup>
-                        <optgroup label="Class XII">
-                          <option value="Class XII - Pre-Medical">Class XII - Pre-Medical</option>
-                          <option value="Class XII - Pre-Engineering">Class XII - Pre-Engineering</option>
-                          <option value="Class XII - General Science">Class XII - General Science</option>
-                          <option value="Class XII - Commerce">Class XII - Commerce</option>
-                          <option value="Class XII - Humanities">Class XII - Humanities</option>
-                          <option value="Class XII - Medical Technology">Class XII - Medical Technology</option>
-                        </optgroup>
+                        <option value="Class IX (SSC I)">Class IX (SSC Part I)</option>
+                        <option value="Class X (SSC II)">Class X (SSC Part II)</option>
+                        <option value="Class XI (HSSC I)">Class XI (HSSC Part I)</option>
+                        <option value="Class XII (HSSC II)">Class XII (HSSC Part II)</option>
+                        <option value="Combine Gap SSC">Combine Gap SSC (I &amp; II)</option>
+                        <option value="Combine Gap HSSC">Combine Gap HSSC (I &amp; II)</option>
                       </select>
                     </div>
                   </div>
 
-                  {/* Row 3: Contact Number & Email */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="contactNumber" className="block text-xs font-semibold text-slate-700 mb-1.5">
-                        Contact Number <span className="text-rose-500">*</span>
-                      </label>
-                      <input
-                        type="tel"
-                        id="contactNumber"
-                        name="contactNumber"
-                        value={formData.contactNumber}
-                        onChange={handleChange}
-                        placeholder="0342-4049132"
-                        required
-                        className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm text-slate-900 transition-colors placeholder:text-slate-400 bg-white"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-xs font-semibold text-slate-700 mb-1.5">
-                        Email (Optional)
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="danishbrothers1998@gmail.com"
-                        className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm text-slate-900 transition-colors placeholder:text-slate-400 bg-white"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Row 4: Message */}
                   <div>
-                    <label htmlFor="message" className="block text-xs font-semibold text-slate-700 mb-1.5">
-                      Message
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      Your Message <span className="text-rose-500">*</span>
                     </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows="3"
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="Write your message here..."
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm text-slate-900 transition-colors placeholder:text-slate-400 bg-white resize-none"
-                    ></textarea>
+                    <div className="relative">
+                      <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        rows={4}
+                        placeholder="Write your enquiry or question here..."
+                        required
+                        className="w-full px-3 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900/20 focus:border-blue-900 resize-none"
+                      ></textarea>
+                    </div>
                   </div>
 
-                  {/* Submit Button */}
-                  <div className="pt-2 flex justify-end">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-blue-950 text-white font-semibold px-8 py-3 rounded-lg shadow-sm hover:shadow transition-all duration-200 active:scale-95 text-sm cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                          <span>Submitting...</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>Submit Enquiry</span>
-                          <Send className="w-4 h-4" />
-                        </>
-                      )}
-                    </button>
-                  </div>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn-shine w-full bg-gradient-to-r from-blue-900 to-indigo-900 hover:from-blue-950 hover:to-indigo-950 text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Sending Message...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4 text-amber-400" />
+                        <span>Send Message</span>
+                      </>
+                    )}
+                  </button>
                 </form>
               )}
             </div>
@@ -352,7 +383,7 @@ export default function VideoAndEnquiry() {
 
       </div>
 
-      {/* Video Modal Player */}
+      {/* Full HD Video Modal */}
       {isPlaying && (
         <div
           onClick={() => setIsPlaying(false)}
