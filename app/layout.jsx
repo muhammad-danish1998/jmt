@@ -1,11 +1,18 @@
 import './globals.css';
-import { Plus_Jakarta_Sans } from 'next/font/google';
+import { Plus_Jakarta_Sans, Dancing_Script } from 'next/font/google';
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
   variable: '--font-jakarta',
+});
+
+const dancing = Dancing_Script({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  display: 'swap',
+  variable: '--font-dancing',
 });
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://jmt-pink.vercel.app';
@@ -262,9 +269,9 @@ export default function RootLayout({ children }) {
   };
 
   return (
-    <html lang="en" className={jakarta.variable} suppressHydrationWarning>
+    <html lang="en" className={`${jakarta.variable} ${dancing.variable}`} suppressHydrationWarning>
       <body
-        className="font-sans antialiased bg-slate-50 text-slate-900 selection:bg-blue-900 selection:text-white"
+        className="font-sans antialiased bg-slate-50 text-slate-900 selection:bg-purple-900 selection:text-white"
         suppressHydrationWarning
       >
         <script

@@ -2,6 +2,7 @@
 
 @theme {
   --font-sans: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+  --font-dancing: var(--font-dancing), 'Dancing Script', cursive;
   --color-primary: #1e3a8a;
   --color-primary-dark: #0f172a;
   --color-accent: #f59e0b;
@@ -14,37 +15,66 @@ html {
 
 body {
   font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
-  @apply bg-slate-50 text-slate-800 antialiased selection:bg-blue-900 selection:text-white;
+  @apply bg-slate-50 text-slate-800 antialiased selection:bg-purple-900 selection:text-white;
+}
+
+.font-dancing {
+  font-family: var(--font-dancing), 'Dancing Script', cursive;
 }
 
 /* Background Dots Pattern */
 .bg-dots-pattern {
-  background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
-/* Custom Floating Animations */
+/* Custom Floating Animations matching reference site */
 @keyframes floatSlow1 {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(1deg); }
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(0.8deg);
+  }
 }
 
 @keyframes floatSlow2 {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(8px) rotate(-1deg); }
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(10px) rotate(-0.8deg);
+  }
+}
+
+@keyframes floatSlow3 {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.02);
+  }
 }
 
 @keyframes shine {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(200%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
 }
 
 .animate-float-1 {
-  animation: floatSlow1 4s ease-in-out infinite;
+  animation: floatSlow1 4.5s ease-in-out infinite;
 }
 
 .animate-float-2 {
-  animation: floatSlow2 5s ease-in-out infinite;
+  animation: floatSlow2 5.5s ease-in-out infinite;
+}
+
+.animate-float-3 {
+  animation: floatSlow3 5s ease-in-out infinite;
 }
 
 .btn-shine {
@@ -67,37 +97,41 @@ body {
 /* Corner bracket marks for image frames */
 .corner-bracket {
   position: absolute;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-color: #f59e0b;
   pointer-events: none;
   z-index: 20;
 }
+
 .corner-bracket-tl {
-  top: -8px;
-  left: -8px;
-  border-top-width: 3px;
-  border-left-width: 3px;
-  border-top-left-radius: 8px;
+  top: -6px;
+  left: -6px;
+  border-top-width: 2.5px;
+  border-left-width: 2.5px;
+  border-top-left-radius: 6px;
 }
+
 .corner-bracket-tr {
-  top: -8px;
-  right: -8px;
-  border-top-width: 3px;
-  border-right-width: 3px;
-  border-top-right-radius: 8px;
+  top: -6px;
+  right: -6px;
+  border-top-width: 2.5px;
+  border-right-width: 2.5px;
+  border-top-right-radius: 6px;
 }
+
 .corner-bracket-bl {
-  bottom: -8px;
-  left: -8px;
-  border-bottom-width: 3px;
-  border-left-width: 3px;
-  border-bottom-left-radius: 8px;
+  bottom: -6px;
+  left: -6px;
+  border-bottom-width: 2.5px;
+  border-left-width: 2.5px;
+  border-bottom-left-radius: 6px;
 }
+
 .corner-bracket-br {
-  bottom: -8px;
-  right: -8px;
-  border-bottom-width: 3px;
-  border-right-width: 3px;
-  border-bottom-right-radius: 8px;
+  bottom: -6px;
+  right: -6px;
+  border-bottom-width: 2.5px;
+  border-right-width: 2.5px;
+  border-bottom-right-radius: 6px;
 }

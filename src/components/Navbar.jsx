@@ -10,51 +10,51 @@ export default function Navbar({ onOpenEnroll }) {
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Programs', href: '#classes' },
-    { name: 'Why JMT', href: '#why-us' },
     { name: 'Process', href: '#process' },
     { name: 'Eligibility', href: '#eligibility' },
-    { name: 'Reviews', href: '#testimonials' },
-    { name: 'FAQ', href: '#faq' },
-    { name: 'Contact Us', href: '#contact' },
+    { name: 'Contact us', href: '#contact' },
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 transition-all shadow-xs">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition-all shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
-          {/* Brand Logo & Name with Ring Mark */}
-          <a href="#home" className="flex items-center gap-3.5 group">
-            <div className="relative w-12 h-12 rounded-full bg-gradient-to-br from-indigo-600 via-blue-700 to-slate-900 text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-all">
-              <div className="absolute inset-0 rounded-full border-2 border-amber-400/60 animate-spin-slow pointer-events-none" />
-              <GraduationCap className="w-6 h-6 text-amber-300" />
+          {/* Brand Logo & Name with Cursive Subtitle */}
+          <a href="#home" className="flex items-center gap-3 group">
+            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-800 text-white flex items-center justify-center shadow-md shadow-purple-500/20 group-hover:scale-105 transition-all">
+              <GraduationCap className="w-6 h-6 text-white" />
             </div>
             <div className="flex flex-col">
               <span className="text-xl sm:text-2xl font-black tracking-tight text-slate-900 leading-none">
-                JMT Public
+                JMT School
               </span>
-              <em className="text-xs sm:text-sm text-slate-500 font-medium tracking-wide not-italic mt-0.5">
-                School &amp; College Karachi
-              </em>
+              <span className="font-dancing text-sm sm:text-base text-purple-700 font-bold -mt-0.5 tracking-wide">
+                Academy &amp; College
+              </span>
             </div>
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-4 xl:gap-6">
-            {navLinks.map((link) => (
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+            {navLinks.map((link, idx) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-semibold text-slate-700 hover:text-blue-900 transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-900 hover:after:w-full after:transition-all"
+                className={`text-sm font-semibold transition-colors py-1 relative ${
+                  idx === 0
+                    ? 'text-indigo-600 font-bold after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-indigo-600'
+                    : 'text-slate-700 hover:text-indigo-600'
+                }`}
               >
                 {link.name}
               </a>
             ))}
           </nav>
 
-          {/* Header CTAs & Badge */}
+          {/* Header CTAs matching screenshot pills */}
           <div className="hidden lg:flex items-center gap-3">
-            <span className="hidden xl:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-900 text-xs font-bold tracking-wide">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-700 text-xs font-bold tracking-wide">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>Admissions Open</span>
             </span>
@@ -62,9 +62,9 @@ export default function Navbar({ onOpenEnroll }) {
             <button
               type="button"
               onClick={onOpenEnroll}
-              className="btn-shine bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 hover:from-blue-800 hover:to-indigo-950 text-white text-xs sm:text-sm font-bold px-5 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 cursor-pointer flex items-center gap-2 border border-blue-800/40"
+              className="btn-shine bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 hover:from-indigo-700 hover:to-purple-800 text-white text-xs sm:text-sm font-bold px-5 py-2.5 rounded-full shadow-md shadow-indigo-500/25 transition-all duration-200 active:scale-95 cursor-pointer flex items-center gap-2"
             >
-              <PenSquare className="w-4 h-4 text-amber-400" />
+              <PenSquare className="w-4 h-4 text-amber-300" />
               <span>Enroll Now</span>
             </button>
           </div>
@@ -74,15 +74,15 @@ export default function Navbar({ onOpenEnroll }) {
             <button
               type="button"
               onClick={onOpenEnroll}
-              className="bg-blue-900 hover:bg-blue-950 text-white text-xs font-bold px-3.5 py-2 rounded-full shadow-xs transition-all active:scale-95 flex items-center gap-1.5"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3.5 py-2 rounded-full shadow-xs transition-all active:scale-95 flex items-center gap-1.5"
             >
-              <PenSquare className="w-3.5 h-3.5 text-amber-400" />
+              <PenSquare className="w-3.5 h-3.5 text-amber-300" />
               <span>Enroll</span>
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="p-2 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-900"
+              className="p-2 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-600"
               aria-label="Toggle navigation menu"
               aria-expanded={isOpen}
             >
