@@ -9,6 +9,7 @@ import ScrollToTop from '../../../src/components/ScrollToTop';
 import FloatingWhatsApp from '../../../src/components/FloatingWhatsApp';
 import EnrollmentModal from '../../../src/components/EnrollmentModal';
 import { BLOG_CATEGORIES } from '../../../src/data/blogsData';
+import { sanitizeHtml } from '../../../src/lib/sanitizeHtml';
 import {
   Calendar,
   Clock,
@@ -245,7 +246,7 @@ export default function SingleBlogPage() {
             {/* Main Rich Article Body */}
             <div
               className="bg-white rounded-[28px] p-6 sm:p-10 shadow-sm border border-slate-100 text-slate-700 leading-relaxed space-y-5 text-sm sm:text-base prose prose-slate max-w-none"
-              dangerouslySetInnerHTML={{ __html: article.content }}
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(article.content) }}
             />
 
             {/* Article Footer Actions */}

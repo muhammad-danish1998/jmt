@@ -1,17 +1,9 @@
 import { NextResponse } from 'next/server';
 import { getSupabase } from '../../../src/lib/supabase';
+import { verifyAdminToken } from '../../../src/lib/auth';
+import { sanitizeHtml } from '../../../src/lib/sanitizeHtml';
 
-// Helper to check admin authentication
-function isAuthenticated(request) {
-  const cookieToken = request.cookies.get('admin_auth_token')?.value;
-  const headerToken = request.headers.get('x-admin-token');
-  return (
-    cookieToken === 'jmt_authenticated_session_token_2026' ||
-    headerToken === 'jmt_authenticated_session_token_2026'
-  );
-}
-
-// GET: Fetch all published blogs (or all for admin)
+// GET: Fetch all published blogs (Public)
 export async function GET(request) {
   try {
     const supabase = getSupabase();
@@ -23,7 +15,10 @@ export async function GET(request) {
     const category = searchParams.get('category');
     const slug = searchParams.get('slug');
 
-    let query = supabase.from('blogs').select('*').order('created_at', { ascending: false });
+    let query = supabase
+      .from('blogs')
+      .select('*')
+      .order('created_at', { ascending: false });
 
     if (slug) {
       query = query.eq('slug', slug);
@@ -49,7 +44,7 @@ export async function GET(request) {
 // POST: Create a new blog (Admin only)
 export async function POST(request) {
   try {
-    if (!isAuthenticated(request)) {
+    if (!verifyAdminToken(request)) {
       return NextResponse.json({ success: false, error: 'Unauthorized.' }, { status: 401 });
     }
 
@@ -81,7 +76,7 @@ export async function POST(request) {
       return NextResponse.json({ success: false, error: 'Supabase is not configured.' }, { status: 500 });
     }
 
-    // Generate slug if not provided
+    // Resolve & sanitize slug
     const resolvedSlug = (
       slug ||
       title
@@ -90,14 +85,19 @@ export async function POST(request) {
         .replace(/(^-|-$)+/g, '')
     ).trim();
 
+    // Sanitize rich HTML content against XSS
+    const cleanContent = sanitizeHtml(content.trim());
+
     const newBlog = {
       title: title.trim(),
       slug: resolvedSlug,
-      category: category || 'Education',
+      category: category || 'Admissions Guidance',
       excerpt: excerpt ? excerpt.trim() : '',
       snippet_answer: snippet_answer ? snippet_answer.trim() : null,
-      key_takeaways: Array.isArray(key_takeaways) ? key_takeaways : [],
-      content: content.trim(),
+      key_takeaways: Array.isArray(key_takeaways)
+        ? key_takeaways.map((t) => (typeof t === 'string' ? t.trim() : '')).filter(Boolean)
+        : [],
+      content: cleanContent,
       image: image || '/hero-students.jpg',
       secondary_image: secondary_image || null,
       author: author || 'JMT Academic Team',

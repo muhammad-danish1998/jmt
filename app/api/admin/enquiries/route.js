@@ -1,21 +1,12 @@
 import { NextResponse } from 'next/server';
 import { getSupabase } from '../../../../src/lib/supabase';
-
-// Helper to check authentication
-function isAuthenticated(request) {
-  const cookieToken = request.cookies.get('admin_auth_token')?.value;
-  const headerToken = request.headers.get('x-admin-token');
-  return (
-    cookieToken === 'jmt_authenticated_session_token_2026' ||
-    headerToken === 'jmt_authenticated_session_token_2026'
-  );
-}
+import { verifyAdminToken } from '../../../../src/lib/auth';
 
 export async function GET(request) {
   try {
-    if (!isAuthenticated(request)) {
+    if (!verifyAdminToken(request)) {
       return NextResponse.json(
-        { success: false, error: 'Unauthorized. Please login.' },
+        { success: false, error: 'Unauthorized. Please log in.' },
         { status: 401 }
       );
     }
@@ -53,7 +44,7 @@ export async function GET(request) {
 
 export async function DELETE(request) {
   try {
-    if (!isAuthenticated(request)) {
+    if (!verifyAdminToken(request)) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized.' },
         { status: 401 }

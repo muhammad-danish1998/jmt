@@ -1,8 +1,23 @@
 import { NextResponse } from 'next/server';
 import { getSupabase } from '../../../src/lib/supabase';
+import { checkRateLimit, getClientIp } from '../../../src/lib/rateLimit';
 
 export async function POST(request) {
   try {
+    const clientIp = getClientIp(request);
+
+    // Rate limit: Max 10 admission submissions per 15 minutes per IP
+    const rateLimit = checkRateLimit(`enquiry_${clientIp}`, 10, 15 * 60 * 1000);
+    if (!rateLimit.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Too many submissions from this connection. Please wait a few minutes before trying again.',
+        },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
     const {
       firstName,
@@ -21,13 +36,15 @@ export async function POST(request) {
     } = body;
 
     // Resolve full student name
-    const resolvedName =
+    const rawName =
       (firstName && lastName ? `${firstName.trim()} ${lastName.trim()}` : '') ||
       (studentName ? studentName.trim() : '') ||
       (firstName ? firstName.trim() : '');
 
-    const resolvedClass = classProgram || classInterested;
-    const resolvedContact = contactNumber ? contactNumber.trim() : '';
+    const resolvedName = rawName.slice(0, 150); // limit string length
+    const resolvedClass = (classProgram || classInterested || '').slice(0, 100);
+    const resolvedContact = (contactNumber ? contactNumber.trim() : '').slice(0, 30);
+    const resolvedEmail = email && typeof email === 'string' ? email.trim().slice(0, 120) : null;
 
     // Validation
     if (!resolvedName || !resolvedContact || !resolvedClass) {
@@ -46,19 +63,19 @@ export async function POST(request) {
       return NextResponse.json(
         {
           success: false,
-          error: 'Supabase is not configured yet. Please add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in your .env file.',
+          error: 'Supabase is not configured yet. Please check your environment configuration.',
         },
         { status: 503 }
       );
     }
 
-    // Build comprehensive structured details string
+    // Build structured sanitized details string
     const details = [];
-    if (address) details.push(`Address: ${address.trim()}`);
-    if (dob) details.push(`DOB: ${dob.trim()}`);
-    if (gender) details.push(`Gender: ${gender}`);
-    if (photoName) details.push(`Photo Uploaded: ${photoName}`);
-    if (message) details.push(`Notes: ${message.trim()}`);
+    if (address) details.push(`Address: ${String(address).trim().slice(0, 200)}`);
+    if (dob) details.push(`DOB: ${String(dob).trim().slice(0, 50)}`);
+    if (gender) details.push(`Gender: ${String(gender).slice(0, 20)}`);
+    if (photoName) details.push(`Photo: ${String(photoName).slice(0, 100)}`);
+    if (message) details.push(`Notes: ${String(message).trim().slice(0, 500)}`);
 
     const fullMessage = details.length > 0 ? details.join(' | ') : 'Online Admission Form Submission';
 
@@ -68,10 +85,10 @@ export async function POST(request) {
       .insert([
         {
           student_name: resolvedName,
-          parent_name: parentName ? parentName.trim() : (gender ? `Gender: ${gender}` : null),
+          parent_name: parentName ? String(parentName).trim().slice(0, 150) : (gender ? `Gender: ${gender}` : null),
           class_interested: resolvedClass,
           contact_number: resolvedContact,
-          email: email ? email.trim() : null,
+          email: resolvedEmail,
           message: fullMessage,
           created_at: new Date().toISOString(),
         },
@@ -101,4 +118,3 @@ export async function POST(request) {
     );
   }
 }
-
