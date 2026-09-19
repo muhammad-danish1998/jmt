@@ -127,8 +127,8 @@ export default function Hero({ onOpenEnroll }) {
 
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-400/40 bg-slate-900 aspect-[4/3] group">
                   <img
-                    src="/school.jpg"
-                    alt="JMT Public Higher Secondary School & College Karachi - Ziauddin Board (ZUEB) Campus"
+                    src="/hero-students.jpg"
+                    alt="JMT Public Higher Secondary School & College Karachi - Ziauddin Board (ZUEB) Students"
                     width={800}
                     height={600}
                     fetchPriority="high"
