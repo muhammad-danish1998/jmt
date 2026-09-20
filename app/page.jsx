@@ -38,22 +38,22 @@ export default function HomePage() {
         {/* 4. About School & Academic Leadership Spotlight */}
         <AboutSection onOpenEnroll={handleOpenEnroll} />
 
-        {/* 5. Eligibility Criteria & Fee Structure */}
-        <EligibilityAndFees />
-
-        {/* 9. Why Choose JMT (School Features & Differentiators) */}
+        {/* 5. Why Choose JMT (School Features & Differentiators) */}
         <WhyChooseUsGrid onOpenEnroll={handleOpenEnroll} />
 
-        {/* 10. Student & Parent Testimonials */}
-        <Testimonials />
+        {/* 6. Eligibility Criteria & Fee Structure */}
+        <EligibilityAndFees />
 
-        {/* 11. Campus Video & Admission Enquiry Form */}
+        {/* 7. Campus Video & Admission Enquiry Form */}
         <VideoAndEnquiry />
 
-        {/* 12. Frequently Asked Questions (FAQ) */}
+        {/* 8. Student & Parent Testimonials */}
+        <Testimonials />
+
+        {/* 9. Frequently Asked Questions (FAQ) */}
         <FAQ />
 
-        {/* 13. Pre-Footer Conversion CTA Band */}
+        {/* 10. Pre-Footer Conversion CTA Band */}
         <CtaBand onOpenEnroll={handleOpenEnroll} />
       </main>
 
