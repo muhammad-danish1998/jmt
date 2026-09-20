@@ -78,7 +78,9 @@ export default function VideoAndEnquiry() {
   };
 
   return (
-    <section id="contact" className="py-16 lg:py-24 bg-slate-50 border-b border-slate-200 relative">
+    <section id="contact" className="py-16 lg:py-24 bg-slate-50 border-b border-slate-200 relative scroll-mt-20">
+      {/* Anchor for enquiry target */}
+      <span id="enquiry" className="absolute -top-20 opacity-0 pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Head */}

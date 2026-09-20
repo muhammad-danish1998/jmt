@@ -51,7 +51,7 @@ export default function HomePage() {
         <Testimonials />
 
         {/* 9. Frequently Asked Questions (FAQ) */}
-        <FAQ />
+        <FAQ onOpenEnroll={handleOpenEnroll} />
 
         {/* 10. Pre-Footer Conversion CTA Band */}
         <CtaBand onOpenEnroll={handleOpenEnroll} />

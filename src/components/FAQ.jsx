@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Plus, Minus, HelpCircle, CheckCircle, Clock } from 'lucide-react';
 
-export default function FAQ() {
+export default function FAQ({ onOpenEnroll }) {
   const [openIndex, setOpenIndex] = useState(0);
 
   const toggleAccordion = (index) => {
@@ -264,12 +264,20 @@ export default function FAQ() {
               Contact our admissions office or submit an enquiry form for personalized guidance.
             </p>
           </div>
-          <a
-            href="#enquiry"
-            className="shrink-0 bg-blue-900 hover:bg-blue-950 text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-lg shadow-sm transition-all"
+          <button
+            type="button"
+            onClick={() => {
+              if (onOpenEnroll) {
+                onOpenEnroll();
+              } else {
+                const el = document.getElementById('enquiry') || document.getElementById('contact');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            className="shrink-0 bg-blue-900 hover:bg-blue-950 active:scale-95 text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-lg shadow-sm transition-all cursor-pointer inline-flex items-center justify-center"
           >
             Ask Admission Officer
-          </a>
+          </button>
         </div>
 
       </div>
