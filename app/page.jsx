@@ -9,7 +9,6 @@ import EligibilityAndFees from '../src/components/EligibilityAndFees';
 import WhyChooseUsGrid from '../src/components/WhyChooseUsGrid';
 import Testimonials from '../src/components/Testimonials';
 import VideoAndEnquiry from '../src/components/VideoAndEnquiry';
-import BlogPreviewSection from '../src/components/BlogPreviewSection';
 import FAQ from '../src/components/FAQ';
 import CtaBand from '../src/components/CtaBand';
 import Footer from '../src/components/Footer';
@@ -51,10 +50,7 @@ export default function HomePage() {
         {/* 11. Campus Video & Admission Enquiry Form */}
         <VideoAndEnquiry />
 
-        {/* 12. Latest Blogs & Articles Preview */}
-        <BlogPreviewSection />
-
-        {/* 13. Frequently Asked Questions (FAQ) */}
+        {/* 12. Frequently Asked Questions (FAQ) */}
         <FAQ />
 
         {/* 13. Pre-Footer Conversion CTA Band */}
