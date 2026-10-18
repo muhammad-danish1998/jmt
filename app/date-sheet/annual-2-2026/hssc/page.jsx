@@ -102,21 +102,26 @@ export default async function HsscDateSheetPage(props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Print-specific style to ensure clean printouts */}
+      {/* Print-specific style to ensure clean, colorful, properly-aligned printouts */}
       <style
         dangerouslySetInnerHTML={{
           __html: `
             @media print {
               @page {
                 size: A4 portrait;
-                margin: 10mm 10mm;
+                margin: 8mm 8mm;
+              }
+              * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
               }
               header, footer, nav[aria-label="Breadcrumb"], .no-print {
                 display: none !important;
               }
               body, main {
                 background: #FFFFFF !important;
-                color: #000000 !important;
+                color: #17202A !important;
                 padding: 0 !important;
                 margin: 0 !important;
               }
@@ -124,16 +129,25 @@ export default async function HsscDateSheetPage(props) {
                 width: 100% !important;
                 border-collapse: collapse !important;
                 page-break-inside: auto;
+                table-layout: fixed !important;
               }
               tr {
                 page-break-inside: avoid;
                 break-inside: avoid;
               }
               th, td {
-                padding: 6px 8px !important;
+                padding: 7px 10px !important;
                 font-size: 11px !important;
-                line-height: 1.35 !important;
-                border-color: #CBD5E1 !important;
+                line-height: 1.4 !important;
+                border: 1px solid #CFE0D6 !important;
+                word-wrap: break-word !important;
+              }
+              thead th {
+                background-color: #EAF2ED !important;
+                color: #0B3D26 !important;
+                font-weight: 700 !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.05em !important;
               }
             }
           `,
@@ -403,30 +417,37 @@ export default async function HsscDateSheetPage(props) {
 
               </div>
 
-              {/* Print-Only Official Institutional Header */}
-              <div className="hidden print:block pb-4 mb-4 border-b-2 border-black">
-                <div className="flex items-start justify-between">
+              {/* Colorful Official Institutional Print Header with College Logo */}
+              <div className="hidden print:flex items-center justify-between pb-3.5 mb-5 border-b-2 border-[#0B3D26] gap-4">
+                <div className="flex items-center gap-3.5">
+                  <img
+                    src="/jmt-logo.png"
+                    alt="JMT School &amp; College Logo"
+                    className="w-16 h-16 object-contain shrink-0"
+                  />
                   <div>
-                    <h1 className="m-0 text-xl font-bold uppercase tracking-tight text-black">
+                    <h1 className="m-0 text-xl font-black uppercase tracking-tight text-[#0B3D26]">
                       JMT Public Higher Secondary School &amp; College
                     </h1>
-                    <p className="m-0 text-xs text-gray-700 mt-0.5">
+                    <p className="m-0 text-xs font-bold text-[#2E6B4A] mt-0.5">
                       Affiliated with Ziauddin University Examination Board (ZUEB), Karachi
                     </p>
-                  </div>
-                  <div className="text-right">
-                    <span className="inline-block px-3 py-1 bg-black text-white text-xs font-bold uppercase tracking-wider rounded">
-                      {activeGroup.label}
-                    </span>
-                    <p className="m-0 text-[11px] text-gray-600 mt-1">
-                      HSSC Annual (II) 2026 Examination
+                    <p className="m-0 text-[11px] text-[#5E6873] mt-0.5">
+                      HSSC Annual (II) 2026 Examination Date Sheet &middot; {activeGroup.label}
                     </p>
                   </div>
                 </div>
-                <div className="mt-3 pt-2 border-t border-dashed border-gray-400 flex justify-between text-xs text-gray-700">
-                  <span>Candidate Name: ___________________________</span>
-                  <span>Roll No: ___________________</span>
-                  <span>Center: ___________________</span>
+
+                <div className="text-right shrink-0">
+                  <span className="inline-block px-3.5 py-1.5 rounded-lg bg-[#0B3D26] text-white text-xs font-extrabold uppercase tracking-wider">
+                    {activeGroup.label}
+                  </span>
+                  <p className="m-0 text-[11px] font-bold text-[#17202A] mt-1.5">
+                    Class XI &amp; Class XII Schedule
+                  </p>
+                  <p className="m-0 text-[10px] text-[#5E6873]">
+                    Source: Official ZUEB Notice
+                  </p>
                 </div>
               </div>
 
@@ -467,23 +488,28 @@ export default async function HsscDateSheetPage(props) {
               <section
                 id={classXI.anchorId}
                 aria-labelledby={classXI.headingId}
-                className="rounded-2xl bg-white border border-[#CFE0D6] overflow-hidden shadow-xs"
+                className="rounded-2xl bg-white border border-[#CFE0D6] overflow-hidden shadow-xs print:rounded-lg print:border print:border-[#CFE0D6] print:shadow-none print:mb-6"
               >
-                <div className="p-5 sm:p-7 pb-4 sm:pb-5">
-                  <h2
-                    id={classXI.headingId}
-                    className="m-0 text-2xl sm:text-[28px] leading-8 sm:leading-9 font-extrabold text-[#17202A]"
-                  >
-                    {classXI.title}
-                  </h2>
-                  <p className="m-0 mt-1.5 text-sm sm:text-[15px] leading-6 text-[#5E6873]">
-                    {classXI.session}
-                  </p>
+                <div className="p-5 sm:p-7 pb-4 sm:pb-5 print:p-3 print:bg-[#0B3D26] flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[#CFE0D6] print:border-b-0">
+                  <div>
+                    <h2
+                      id={classXI.headingId}
+                      className="m-0 text-2xl sm:text-[28px] leading-8 sm:leading-9 font-extrabold text-[#17202A] print:text-white print:text-base"
+                    >
+                      {classXI.title}
+                    </h2>
+                    <p className="m-0 mt-1.5 text-sm sm:text-[15px] leading-6 text-[#5E6873] print:text-white/80 print:text-xs">
+                      {classXI.session}
+                    </p>
+                  </div>
+                  <span className="text-xs font-bold text-[#0B3D26] print:text-white bg-[#EAF2ED] print:bg-white/15 px-3 py-1 rounded-full w-fit">
+                    Morning Shift: 09:30 AM to 12:30 PM
+                  </span>
                 </div>
 
                 {/* Desktop Semantic Table */}
                 <div className="hidden lg:block print:block overflow-x-auto">
-                  <table className="w-full border-collapse min-w-[720px]">
+                  <table className="w-full border-collapse min-w-[720px] print:min-w-0 print:w-full print:table-fixed">
                     <caption className="sr-only">
                       {classXI.title} HSSC date sheet, {classXI.session}
                     </caption>
@@ -491,25 +517,25 @@ export default async function HsscDateSheetPage(props) {
                       <tr className="bg-[#EAF2ED]">
                         <th
                           scope="col"
-                          className="py-3.5 px-5 text-left text-xs leading-4 font-bold tracking-[0.1em] uppercase text-[#2E6B4A]"
+                          className="py-3.5 px-5 text-left text-xs leading-4 font-bold tracking-[0.1em] uppercase text-[#2E6B4A] print:w-[22%] print:py-2 print:px-3"
                         >
-                          Date
+                          Date &amp; Day
                         </th>
                         <th
                           scope="col"
-                          className="py-3.5 px-5 text-left text-xs leading-4 font-bold tracking-[0.1em] uppercase text-[#2E6B4A]"
+                          className="py-3.5 px-5 text-left text-xs leading-4 font-bold tracking-[0.1em] uppercase text-[#2E6B4A] print:w-[40%] print:py-2 print:px-3"
                         >
                           Subject
                         </th>
                         <th
                           scope="col"
-                          className="py-3.5 px-5 text-left text-xs leading-4 font-bold tracking-[0.1em] uppercase text-[#2E6B4A]"
+                          className="py-3.5 px-5 text-left text-xs leading-4 font-bold tracking-[0.1em] uppercase text-[#2E6B4A] print:w-[20%] print:py-2 print:px-3"
                         >
                           Time
                         </th>
                         <th
                           scope="col"
-                          className="py-3.5 px-5 text-left text-xs leading-4 font-bold tracking-[0.1em] uppercase text-[#2E6B4A]"
+                          className="py-3.5 px-5 text-left text-xs leading-4 font-bold tracking-[0.1em] uppercase text-[#2E6B4A] print:w-[18%] print:py-2 print:px-3"
                         >
                           Group
                         </th>
@@ -674,23 +700,28 @@ export default async function HsscDateSheetPage(props) {
               <section
                 id={classXII.anchorId}
                 aria-labelledby={classXII.headingId}
-                className="rounded-2xl bg-white border border-[#CFE0D6] overflow-hidden shadow-xs"
+                className="rounded-2xl bg-white border border-[#CFE0D6] overflow-hidden shadow-xs print:rounded-lg print:border print:border-[#CFE0D6] print:shadow-none print:mb-6"
               >
-                <div className="p-5 sm:p-7 pb-4 sm:pb-5">
-                  <h2
-                    id={classXII.headingId}
-                    className="m-0 text-2xl sm:text-[28px] leading-8 sm:leading-9 font-extrabold text-[#17202A]"
-                  >
-                    {classXII.title}
-                  </h2>
-                  <p className="m-0 mt-1.5 text-sm sm:text-[15px] leading-6 text-[#5E6873]">
-                    {classXII.session}
-                  </p>
+                <div className="p-5 sm:p-7 pb-4 sm:pb-5 print:p-3 print:bg-[#0B3D26] flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[#CFE0D6] print:border-b-0">
+                  <div>
+                    <h2
+                      id={classXII.headingId}
+                      className="m-0 text-2xl sm:text-[28px] leading-8 sm:leading-9 font-extrabold text-[#17202A] print:text-white print:text-base"
+                    >
+                      {classXII.title}
+                    </h2>
+                    <p className="m-0 mt-1.5 text-sm sm:text-[15px] leading-6 text-[#5E6873] print:text-white/80 print:text-xs">
+                      {classXII.session}
+                    </p>
+                  </div>
+                  <span className="text-xs font-bold text-[#0B3D26] print:text-white bg-[#EAF2ED] print:bg-white/15 px-3 py-1 rounded-full w-fit">
+                    Afternoon Shift: 02:00 PM to 05:00 PM (Friday: 02:30 PM)
+                  </span>
                 </div>
 
                 {/* Desktop Semantic Table */}
                 <div className="hidden lg:block print:block overflow-x-auto">
-                  <table className="w-full border-collapse min-w-[720px]">
+                  <table className="w-full border-collapse min-w-[720px] print:min-w-0 print:w-full print:table-fixed">
                     <caption className="sr-only">
                       {classXII.title} HSSC date sheet, {classXII.session}
                     </caption>
@@ -698,25 +729,25 @@ export default async function HsscDateSheetPage(props) {
                       <tr className="bg-[#EAF2ED]">
                         <th
                           scope="col"
-                          className="py-3.5 px-5 text-left text-xs leading-4 font-bold tracking-[0.1em] uppercase text-[#2E6B4A]"
+                          className="py-3.5 px-5 text-left text-xs leading-4 font-bold tracking-[0.1em] uppercase text-[#2E6B4A] print:w-[22%] print:py-2 print:px-3"
                         >
-                          Date
+                          Date &amp; Day
                         </th>
                         <th
                           scope="col"
-                          className="py-3.5 px-5 text-left text-xs leading-4 font-bold tracking-[0.1em] uppercase text-[#2E6B4A]"
+                          className="py-3.5 px-5 text-left text-xs leading-4 font-bold tracking-[0.1em] uppercase text-[#2E6B4A] print:w-[40%] print:py-2 print:px-3"
                         >
                           Subject
                         </th>
                         <th
                           scope="col"
-                          className="py-3.5 px-5 text-left text-xs leading-4 font-bold tracking-[0.1em] uppercase text-[#2E6B4A]"
+                          className="py-3.5 px-5 text-left text-xs leading-4 font-bold tracking-[0.1em] uppercase text-[#2E6B4A] print:w-[20%] print:py-2 print:px-3"
                         >
                           Time
                         </th>
                         <th
                           scope="col"
-                          className="py-3.5 px-5 text-left text-xs leading-4 font-bold tracking-[0.1em] uppercase text-[#2E6B4A]"
+                          className="py-3.5 px-5 text-left text-xs leading-4 font-bold tracking-[0.1em] uppercase text-[#2E6B4A] print:w-[18%] print:py-2 print:px-3"
                         >
                           Group
                         </th>
@@ -878,9 +909,15 @@ export default async function HsscDateSheetPage(props) {
               </section>
 
               {/* Exact Footnote */}
-              <p className="m-0 text-sm leading-[22px] text-[#5E6873]">
+              <p className="m-0 text-sm leading-[22px] text-[#5E6873] print:text-xs print:leading-5 print:mt-4 print:text-gray-600">
                 <strong className="font-bold text-[#8A6425]">*</strong> Printed in the ZUEB notice exactly as shown (for example, a morning paper printed as PM, or a 2-hour paper with a 1.5-hour time slot). Please check the official notice before your paper.
               </p>
+
+              {/* Print-Only Official Footer */}
+              <div className="hidden print:flex items-center justify-between pt-3 mt-4 border-t border-[#CFE0D6] text-[11px] text-[#5E6873]">
+                <span>JMT Public Higher Secondary School &amp; College, Karachi</span>
+                <span>ZUEB Affiliated Institution &middot; Official Date Sheet</span>
+              </div>
 
             </div>
           </div>
