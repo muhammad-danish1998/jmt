@@ -138,6 +138,75 @@ h2 {
   .btn:hover .arrow {
     transform: translateX(3px);
   }
+
+  /* Floating cards and glowing frame animations (inspired by reference design) */
+  @keyframes float-slow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  @keyframes float-delayed {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @keyframes float-mid {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-7px);
+    }
+  }
+
+  @keyframes ring-breathe {
+    0%, 100% {
+      opacity: 0.85;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.35;
+      transform: scale(0.99);
+    }
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 0.25;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.12;
+      transform: scale(1.08);
+    }
+  }
+
+  .animate-float-slow {
+    animation: float-slow 4.5s ease-in-out infinite;
+  }
+  .animate-float-delayed {
+    animation: float-delayed 5s ease-in-out 1.2s infinite;
+  }
+  .animate-float-mid {
+    animation: float-mid 4s ease-in-out 0.6s infinite;
+  }
+  .animate-ring-breathe {
+    animation: ring-breathe 3.5s ease-in-out infinite;
+  }
+  .animate-ring-breathe-delayed {
+    animation: ring-breathe 3.5s ease-in-out 1s infinite;
+  }
+  .animate-pulse-slow {
+    animation: pulse-slow 6s ease-in-out infinite;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
