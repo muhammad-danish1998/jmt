@@ -6,6 +6,7 @@ import ScrollToTop from '../../../../src/components/ScrollToTop';
 import FloatingWhatsApp from '../../../../src/components/FloatingWhatsApp';
 import { getHsscDateSheet, HSSC_FAQS } from '../../../../src/lib/date-sheets';
 import { SITE } from '../../../../src/lib/site';
+import PrintTimetableButton from '../../../../src/components/PrintTimetableButton';
 
 export const metadata = {
   title: {
@@ -106,19 +107,33 @@ export default async function HsscDateSheetPage(props) {
         dangerouslySetInnerHTML={{
           __html: `
             @media print {
+              @page {
+                size: A4 portrait;
+                margin: 10mm 10mm;
+              }
               header, footer, nav[aria-label="Breadcrumb"], .no-print {
                 display: none !important;
               }
               body, main {
                 background: #FFFFFF !important;
                 color: #000000 !important;
+                padding: 0 !important;
+                margin: 0 !important;
               }
               table {
+                width: 100% !important;
+                border-collapse: collapse !important;
                 page-break-inside: auto;
               }
               tr {
                 page-break-inside: avoid;
-                page-break-after: auto;
+                break-inside: avoid;
+              }
+              th, td {
+                padding: 6px 8px !important;
+                font-size: 11px !important;
+                line-height: 1.35 !important;
+                border-color: #CBD5E1 !important;
               }
             }
           `,
@@ -131,7 +146,7 @@ export default async function HsscDateSheetPage(props) {
 
       <main id="main-content" className="flex-grow">
         {/* 1. HERO HEADER */}
-        <section className="bg-[#FAFAF7]">
+        <section className="no-print bg-[#FAFAF7]">
           <div className="max-w-[1440px] mx-auto box-border px-4 sm:px-8 lg:px-16 pt-10 sm:pt-14 pb-8 sm:pb-10">
             <div className="flex flex-col items-start gap-5 max-w-[1000px] w-full">
               
@@ -266,36 +281,64 @@ export default async function HsscDateSheetPage(props) {
                   </span>
                   <div className="flex flex-col gap-0.5">
                     <span className="text-[17px] leading-[26px] font-bold text-[#17202A]">
-                      Download this time table
+                      {activeGroup.slug === 'all'
+                        ? 'Download this time table'
+                        : `Download ${activeGroup.label} Time Table`}
                     </span>
                     <span className="text-sm leading-[22px] text-[#5E6873]">
-                      PDF, 2 pages, with the JMT logo. Same dates and timings as the ZUEB notice.
+                      {activeGroup.slug === 'all'
+                        ? 'PDF, 2 pages, with the JMT logo. Same dates and timings as the ZUEB notice.'
+                        : `Class XI & XII examination schedule filtered specifically for ${activeGroup.label}.`}
                     </span>
                   </div>
                 </div>
 
-                <a
-                  href={meta.downloadPdfUrl}
-                  download={meta.downloadPdfFileName}
-                  className="btn shrink-0 inline-flex items-center justify-center gap-2.5 h-[52px] px-6 rounded-lg bg-[#0B3D26] hover:bg-[#082d1c] active:scale-98 text-white text-[15px] leading-5 font-bold transition-all shadow-xs"
-                >
-                  <svg
-                    aria-hidden="true"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#FFFFFF"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                {activeGroup.slug === 'all' ? (
+                  <a
+                    href={meta.downloadPdfUrl}
+                    download={meta.downloadPdfFileName}
+                    className="btn shrink-0 inline-flex items-center justify-center gap-2.5 h-[52px] px-6 rounded-lg bg-[#0B3D26] hover:bg-[#082d1c] active:scale-98 text-white text-[15px] leading-5 font-bold transition-all shadow-xs"
                   >
-                    <path d="M12 15V3" />
-                    <path d="m7 10 5 5 5-5" />
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  </svg>
-                  <span>Download PDF</span>
-                </a>
+                    <svg
+                      aria-hidden="true"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#FFFFFF"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M12 15V3" />
+                      <path d="m7 10 5 5 5-5" />
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    </svg>
+                    <span>Download PDF</span>
+                  </a>
+                ) : (
+                  <PrintTimetableButton
+                    label={`Download ${activeGroup.label} (PDF)`}
+                    className="btn shrink-0 inline-flex items-center justify-center gap-2.5 h-[52px] px-6 rounded-lg bg-[#0B3D26] hover:bg-[#082d1c] active:scale-98 text-white text-[15px] leading-5 font-bold transition-all shadow-xs cursor-pointer"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#FFFFFF"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M12 15V3" />
+                      <path d="m7 10 5 5 5-5" />
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    </svg>
+                    <span>Download {activeGroup.label} (PDF)</span>
+                  </PrintTimetableButton>
+                )}
               </div>
 
             </div>
@@ -360,6 +403,66 @@ export default async function HsscDateSheetPage(props) {
 
               </div>
 
+              {/* Print-Only Official Institutional Header */}
+              <div className="hidden print:block pb-4 mb-4 border-b-2 border-black">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h1 className="m-0 text-xl font-bold uppercase tracking-tight text-black">
+                      JMT Public Higher Secondary School &amp; College
+                    </h1>
+                    <p className="m-0 text-xs text-gray-700 mt-0.5">
+                      Affiliated with Ziauddin University Examination Board (ZUEB), Karachi
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <span className="inline-block px-3 py-1 bg-black text-white text-xs font-bold uppercase tracking-wider rounded">
+                      {activeGroup.label}
+                    </span>
+                    <p className="m-0 text-[11px] text-gray-600 mt-1">
+                      HSSC Annual (II) 2026 Examination
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-3 pt-2 border-t border-dashed border-gray-400 flex justify-between text-xs text-gray-700">
+                  <span>Candidate Name: ___________________________</span>
+                  <span>Roll No: ___________________</span>
+                  <span>Center: ___________________</span>
+                </div>
+              </div>
+
+              {/* Active Group Action Bar */}
+              {activeGroup.slug !== 'all' && (
+                <div className="no-print flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:px-5 rounded-xl bg-white border border-[#CFE0D6] shadow-2xs">
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#0B3D26] shrink-0" />
+                    <p className="m-0 text-sm leading-5 text-[#17202A]">
+                      Filtered for <strong className="font-bold text-[#0B3D26]">{activeGroup.label}</strong> (Class XI &amp; XII)
+                    </p>
+                  </div>
+                  <PrintTimetableButton
+                    label={`Download ${activeGroup.label} (PDF)`}
+                    className="inline-flex items-center justify-center gap-2 px-4.5 py-2.5 rounded-lg bg-[#0B3D26] hover:bg-[#082d1c] active:scale-98 text-white text-sm leading-5 font-bold shadow-xs cursor-pointer transition-all"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#FFFFFF"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M12 15V3" />
+                      <path d="m7 10 5 5 5-5" />
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    </svg>
+                    <span>Download {activeGroup.label} (PDF)</span>
+                  </PrintTimetableButton>
+                </div>
+              )}
+
               {/* TABLE 1: CLASS XI (HSSC Part I) */}
               <section
                 id={classXI.anchorId}
@@ -379,7 +482,7 @@ export default async function HsscDateSheetPage(props) {
                 </div>
 
                 {/* Desktop Semantic Table */}
-                <div className="hidden lg:block overflow-x-auto">
+                <div className="hidden lg:block print:block overflow-x-auto">
                   <table className="w-full border-collapse min-w-[720px]">
                     <caption className="sr-only">
                       {classXI.title} HSSC date sheet, {classXI.session}
@@ -490,7 +593,7 @@ export default async function HsscDateSheetPage(props) {
                 </div>
 
                 {/* Mobile Cards (Rendered on mobile as in design) */}
-                <div className="lg:hidden p-4 pt-0 flex flex-col gap-3">
+                <div className="lg:hidden print:hidden p-4 pt-0 flex flex-col gap-3">
                   {classXI.dateBlocks.map((dateBlock) => (
                     <div
                       key={dateBlock.date}
@@ -586,7 +689,7 @@ export default async function HsscDateSheetPage(props) {
                 </div>
 
                 {/* Desktop Semantic Table */}
-                <div className="hidden lg:block overflow-x-auto">
+                <div className="hidden lg:block print:block overflow-x-auto">
                   <table className="w-full border-collapse min-w-[720px]">
                     <caption className="sr-only">
                       {classXII.title} HSSC date sheet, {classXII.session}
@@ -697,7 +800,7 @@ export default async function HsscDateSheetPage(props) {
                 </div>
 
                 {/* Mobile Cards (Rendered on mobile as in design) */}
-                <div className="lg:hidden p-4 pt-0 flex flex-col gap-3">
+                <div className="lg:hidden print:hidden p-4 pt-0 flex flex-col gap-3">
                   {classXII.dateBlocks.map((dateBlock) => (
                     <div
                       key={dateBlock.date}
@@ -868,7 +971,7 @@ export default async function HsscDateSheetPage(props) {
         </section>
 
         {/* 4. FAQ SECTION */}
-        <section className="bg-white border-t border-[#E5E7EB]">
+        <section className="no-print bg-white border-t border-[#E5E7EB]">
           <div className="max-w-[1440px] mx-auto box-border px-4 sm:px-8 lg:px-16 pt-4 pb-16 sm:pb-20">
             <div className="flex items-center gap-3">
               <span className="w-7 h-[2px] bg-[#C89B3C] block" />
