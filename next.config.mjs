@@ -4,7 +4,19 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'ziauddinboardadmission.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.ziauddinboardadmission.com',
+      },
+      {
+        protocol: 'https',
         hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.supabase.co',
       },
     ],
   },

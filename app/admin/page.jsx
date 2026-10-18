@@ -764,7 +764,7 @@ export default function AdminPage() {
                 <div>
                   <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Database Status</p>
                   <div className="flex items-center gap-2 mt-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
                     <span className="text-sm font-bold text-slate-800">Supabase Connected</span>
                   </div>
                 </div>

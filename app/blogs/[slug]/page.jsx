@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import TopBar from '../../../src/components/TopBar';
 import Navbar from '../../../src/components/Navbar';
 import Footer from '../../../src/components/Footer';
 import ScrollToTop from '../../../src/components/ScrollToTop';
@@ -15,10 +14,8 @@ import {
   Clock,
   User,
   ArrowLeft,
-  ArrowRight,
   Sparkles,
   GraduationCap,
-  Share2,
   CheckCircle2,
   Tag,
   BookOpen,
@@ -161,9 +158,8 @@ export default function SingleBlogPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      {/* 1. Top Announcement & Header */}
-      <TopBar onOpenEnroll={handleOpenEnroll} />
-      <Navbar onOpenEnroll={handleOpenEnroll} />
+      {/* Header */}
+      <Navbar />
 
       {/* 2. Article Hero Banner */}
       <header className="relative bg-gradient-to-br from-[#0c0422] via-[#1a0b3e] to-[#2d0e5e] text-white pt-12 pb-16 lg:pt-16 lg:pb-20 overflow-hidden">

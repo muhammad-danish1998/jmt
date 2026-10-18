@@ -1,5 +1,7 @@
+import { SITE } from '../src/lib/site';
+
 export default function robots() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://jmt-pink.vercel.app';
+  const baseUrl = SITE.url;
 
   return {
     rules: [

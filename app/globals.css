@@ -2,136 +2,147 @@
 
 @theme {
   --font-sans: var(--font-jakarta), system-ui, -apple-system, sans-serif;
-  --font-dancing: var(--font-dancing), 'Dancing Script', cursive;
-  --color-primary: #1e3a8a;
-  --color-primary-dark: #0f172a;
-  --color-accent: #f59e0b;
-  --color-accent-hover: #d97706;
+  --font-jakarta: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+
+  /* Approved Design Tokens — updated agents.md (Section 5) */
+  --color-primary: #0B3D26;
+  --color-support: #2E6B4A;
+  --color-tint: #EAF2ED;
+  --color-tint-border: #CFE0D6;
+  --color-gold: #C89B3C;
+  --color-gold-tint: #FBF1D8;
+  --color-gold-border: #EBD9A6;
+  --color-gold-deep: #8A6425;
+  --color-rules-bg: #FBF6E9;
+  --color-page: #FAFAF7;
+  --color-ink: #17202A;
+  --color-body: #3A4551;
+  --color-muted: #5E6873;
+  --color-border: #E5E7EB;
+  --color-input-border: #8291A3;
+  --color-error: #B42318;
+
+  /* Standard Border Radii */
+  --radius-btn: 8px;
+  --radius-tile: 12px;
+  --radius-card: 16px;
+  --radius-panel: 20px;
+  --radius-pill: 999px;
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
   font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
-  @apply bg-slate-50 text-slate-800 antialiased selection:bg-purple-900 selection:text-white;
+  background-color: #FAFAF7;
+  color: #17202A;
+  -webkit-font-smoothing: antialiased;
 }
 
-.font-dancing {
-  font-family: var(--font-dancing), 'Dancing Script', cursive;
+/* Typography micro-adjustments */
+h1 {
+  letter-spacing: -0.015em;
 }
 
-/* Background Dots Pattern */
-.bg-dots-pattern {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
-  background-size: 24px 24px;
+h2 {
+  letter-spacing: -0.01em;
 }
 
-/* Custom Floating Animations matching reference site */
-@keyframes floatSlow1 {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
+/* Accessible interactive focus */
+:focus-visible {
+  outline: 2px solid #C89B3C;
+  outline-offset: 2px;
+}
+
+/* Motion Spec (updated agents.md - Section 11) */
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
   }
-  50% {
-    transform: translateY(-10px) rotate(0.8deg);
+
+  /* Hero load-in: CSS only, content visible without JS */
+  .hero-enter > * {
+    animation: fade-up 450ms var(--ease) both;
+  }
+  .hero-enter > *:nth-child(2) {
+    animation-delay: 70ms;
+  }
+  .hero-enter > *:nth-child(3) {
+    animation-delay: 140ms;
+  }
+  .hero-enter > *:nth-child(4) {
+    animation-delay: 210ms;
+  }
+  .hero-enter > *:nth-child(5) {
+    animation-delay: 280ms;
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Highlight under "4 Months" */
+  .hl {
+    background: linear-gradient(transparent 66%, rgba(200, 155, 60, 0.45) 66%) no-repeat 0 100% / 0% 100%;
+    animation: hl-draw 600ms var(--ease) 350ms forwards;
+  }
+
+  @keyframes hl-draw {
+    to {
+      background-size: 100% 100%;
+    }
+  }
+
+  /* Scroll reveal */
+  [data-motion="ready"] .reveal:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  .reveal {
+    transition: opacity 450ms var(--ease), transform 450ms var(--ease);
+    transition-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  .btn {
+    transition: transform 150ms var(--ease), box-shadow 150ms var(--ease), background-color 150ms var(--ease);
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  .btn .arrow {
+    transition: transform 150ms var(--ease);
+  }
+
+  .btn:hover .arrow {
+    transform: translateX(3px);
   }
 }
 
-@keyframes floatSlow2 {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
   }
-  50% {
-    transform: translateY(10px) rotate(-0.8deg);
-  }
-}
-
-@keyframes floatSlow3 {
-  0%, 100% {
-    transform: translateY(0px) scale(1);
-  }
-  50% {
-    transform: translateY(-8px) scale(1.02);
-  }
-}
-
-@keyframes shine {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(200%);
-  }
-}
-
-.animate-float-1 {
-  animation: floatSlow1 4.5s ease-in-out infinite;
-}
-
-.animate-float-2 {
-  animation: floatSlow2 5.5s ease-in-out infinite;
-}
-
-.animate-float-3 {
-  animation: floatSlow3 5s ease-in-out infinite;
-}
-
-.btn-shine {
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-shine::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-  transform: skewX(-20deg);
-  animation: shine 3.5s infinite;
-}
-
-/* Corner bracket marks for image frames */
-.corner-bracket {
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  border-color: #f59e0b;
-  pointer-events: none;
-  z-index: 20;
-}
-
-.corner-bracket-tl {
-  top: -6px;
-  left: -6px;
-  border-top-width: 2.5px;
-  border-left-width: 2.5px;
-  border-top-left-radius: 6px;
-}
-
-.corner-bracket-tr {
-  top: -6px;
-  right: -6px;
-  border-top-width: 2.5px;
-  border-right-width: 2.5px;
-  border-top-right-radius: 6px;
-}
-
-.corner-bracket-bl {
-  bottom: -6px;
-  left: -6px;
-  border-bottom-width: 2.5px;
-  border-left-width: 2.5px;
-  border-bottom-left-radius: 6px;
-}
-
-.corner-bracket-br {
-  bottom: -6px;
-  right: -6px;
-  border-bottom-width: 2.5px;
-  border-right-width: 2.5px;
-  border-bottom-right-radius: 6px;
 }

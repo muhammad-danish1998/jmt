@@ -1,7 +1,7 @@
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://jmt-pink.vercel.app';
 
 export const metadata = {
-  title: 'Latest Educational Blogs & Examination Guides | Ziauddin Board (ZUEB)',
+  title: 'Educational Blogs & Examination Guides | ZUEB',
   description:
     'Educational articles, Matric vs O-Level comparisons, exam preparation tips, and board registration guidelines from JMT Public Higher Secondary School & College Karachi.',
   keywords: [

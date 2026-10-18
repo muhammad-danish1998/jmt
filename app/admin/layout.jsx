@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Admin Portal | JMT Public School & College',
+  title: 'Admin Portal',
   description: 'Administrative dashboard for JMT Public Higher Secondary School & College.',
   robots: {
     index: false,

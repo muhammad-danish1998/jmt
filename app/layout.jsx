@@ -1,5 +1,7 @@
 import './globals.css';
-import { Plus_Jakarta_Sans, Dancing_Script } from 'next/font/google';
+import { Plus_Jakarta_Sans } from 'next/font/google';
+import { SITE } from '../src/lib/site';
+import MotionReveal from '../src/components/MotionReveal';
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -8,23 +10,21 @@ const jakarta = Plus_Jakarta_Sans({
   variable: '--font-jakarta',
 });
 
-const dancing = Dancing_Script({
-  subsets: ['latin'],
-  weight: ['500', '600', '700'],
-  display: 'swap',
-  variable: '--font-dancing',
-});
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://jmt-pink.vercel.app';
+const SITE_URL = SITE.url;
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Ziauddin Board (ZUEB) | Matric & Inter Admissions 2026-27 | JMT School & College Karachi',
-    template: '%s | Ziauddin Board (ZUEB) - JMT School & College',
+    default: 'Ziauddin Board (ZUEB) Admissions | JMT School & College',
+    template: '%s | JMT School & College',
   },
   description:
-    'Admissions open for Ziauddin Board (ZUEB) Matric (SSC) & Intermediate (HSSC) at JMT Public Higher Secondary School & College Karachi. Fast track exams, regular & private enrollment for FSC Pre-Medical, Pre-Engineering, ICS, I.Com & Humanities.',
+    'Admissions open for Ziauddin Board (ZUEB) Matric & Intermediate at JMT College Karachi. Fast-track combined exams, regular enrollment & scholarships available.',
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/icon.svg',
+  },
   keywords: [
     'Ziauddin Board',
     'ZUEB',
@@ -65,9 +65,9 @@ export const metadata = {
     'JMT PUBLIC HIGHER SECONDARY SCHOOL & COLLEGE',
     'JMT School Karachi',
   ],
-  authors: [{ name: 'JMT Educational Board' }],
-  creator: 'JMT PUBLIC HIGHER SECONDARY SCHOOL & COLLEGE',
-  publisher: 'JMT PUBLIC HIGHER SECONDARY SCHOOL & COLLEGE',
+  authors: [{ name: SITE.name }],
+  creator: SITE.name,
+  publisher: SITE.name,
   formatDetection: {
     email: false,
     address: false,
@@ -94,16 +94,16 @@ export const metadata = {
     type: 'website',
     locale: 'en_PK',
     url: SITE_URL,
-    siteName: 'JMT Public Higher Secondary School & College - Ziauddin Board (ZUEB)',
-    title: 'Ziauddin Board (ZUEB) | Matric & Inter Admissions Open 2026-27 | JMT College Karachi',
+    siteName: `${SITE.name} - Ziauddin Board (ZUEB)`,
+    title: 'Ziauddin Board (ZUEB) | Matric & Intermediate Admissions 2026-27 | JMT College Karachi',
     description:
-      'Enroll in Classes IX, X, XI & XII under Ziauddin Board (ZUEB). Fast track exams, regular & private registration with expert faculty and flexible academic options in Karachi.',
+      'Fast track exams and admissions for Classes IX, X, XI & XII under Ziauddin Examination Board (ZUEB) at JMT Public School & College Karachi.',
     images: [
       {
         url: `${SITE_URL}/school.jpg`,
         width: 1200,
         height: 630,
-        alt: 'JMT Public Higher Secondary School & College Karachi - Ziauddin Board Campus',
+        alt: `${SITE.name} Karachi - Ziauddin Board Campus`,
       },
     ],
   },
@@ -117,8 +117,8 @@ export const metadata = {
   other: {
     'geo.region': 'PK-SD',
     'geo.placename': 'Karachi',
-    'geo.position': '24.848752;67.221493',
-    'ICBM': '24.848752, 67.221493',
+    'geo.position': `${SITE.mapCoordinates.lat};${SITE.mapCoordinates.lng}`,
+    'ICBM': `${SITE.mapCoordinates.lat}, ${SITE.mapCoordinates.lng}`,
   },
 };
 
@@ -126,7 +126,7 @@ export const viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#1e3a8a',
+  themeColor: '#0B3D26',
 };
 
 export default function RootLayout({ children }) {
@@ -136,136 +136,92 @@ export default function RootLayout({ children }) {
       {
         '@type': 'EducationalOrganization',
         '@id': `${SITE_URL}/#organization`,
-        name: 'JMT PUBLIC HIGHER SECONDARY SCHOOL & COLLEGE',
+        name: SITE.name,
         alternateName: [
           'JMT Public School & College',
+          'JMT School & College',
           'Ziauddin Board JMT Center Karachi',
           'JMT Higher Secondary School',
         ],
         url: SITE_URL,
-        logo: `${SITE_URL}/favicon.svg`,
+        logo: `${SITE_URL}/jmt-logo.png`,
         image: `${SITE_URL}/school.jpg`,
         description:
           'Premier educational institution affiliated with Ziauddin Examination Board (ZUEB) offering secondary and higher secondary education for Matric (Grade IX & X) and Intermediate (Grade XI & XII) in Karachi, Pakistan.',
         address: {
           '@type': 'PostalAddress',
-          streetAddress: 'House 381, Street 9, JMT School Qazzafi Town, Quaidabad, Bin Qasim',
+          streetAddress: 'House 381, Street 9, Qazzafi Town, Quaidabad, Bin Qasim',
           addressLocality: 'Malir, Karachi',
           addressRegion: 'Sindh',
-          postalCode: '75120',
           addressCountry: 'PK',
         },
         geo: {
           '@type': 'GeoCoordinates',
-          latitude: 24.848752,
-          longitude: 67.221493,
+          latitude: SITE.mapCoordinates.lat,
+          longitude: SITE.mapCoordinates.lng,
         },
+        openingHoursSpecification: [
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            opens: '09:00',
+            closes: '17:00',
+          },
+        ],
         contactPoint: {
           '@type': 'ContactPoint',
           telephone: '+92-342-4049132',
-          email: 'danishbrothers1998@gmail.com',
           contactType: 'Admissions Office',
           areaServed: 'PK',
           availableLanguage: ['English', 'Urdu'],
         },
-        sameAs: [
-          'https://facebook.com',
-          'https://instagram.com',
-          'https://youtube.com',
-          'https://twitter.com',
-        ],
       },
       {
         '@type': 'WebSite',
         '@id': `${SITE_URL}/#website`,
         url: SITE_URL,
-        name: 'Ziauddin Board (ZUEB) Admissions | JMT Public School & College',
+        name: `${SITE.name} | Ziauddin Board (ZUEB) Admissions`,
         publisher: {
           '@id': `${SITE_URL}/#organization`,
         },
         inLanguage: 'en-PK',
       },
-      {
-        '@type': 'FAQPage',
-        '@id': `${SITE_URL}/#faq`,
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: 'Eligibility Criteria for Regular/Private Enrollment – Grade IX',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Regular: Candidates who passed the Grade VIII Examination in 2026 or earlier may appear for Grade IX Regular (Age Limit: 12 to 18 years). Private: Any fresh candidate who is at least 12 years old may appear for Grade IX Private, subject to the basic document requirements.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Eligibility Criteria for Regular/Private Enrollment – Grade XI',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Regular: Candidates who passed the SSC Examination in 2026 or within the last 5 years (2021 or later) may appear for Grade XI Regular (Age Limit: Not more than 23 years). Private: Any fresh candidate who is at least 14 years old may appear for Grade XI Private, subject to the basic document requirements. Candidates who have a gap of more than 5 years after passing the SSC Examination may also appear as private candidates.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Eligibility Criteria for Combined Gap Enrollment – SSC',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Candidates who have a gap of at least 2 years after passing Grade VIII may appear for the Part I & II Combined SSC Examination as private candidates. Age Limit: SSC Science: 14 to 20 years; SSC General: 14 years and above (no upper age limit).',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Eligibility Criteria for Combined Gap Enrollment – HSSC',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Candidates who have a gap of at least 2 years after passing the SSC Examination (passed in 2024 or earlier) may appear for the Part I & II Combined HSSC Examination as private candidates. Age Limit: HSSC Science: Not more than 25 years; HSSC Commerce: Not more than 35 years; HSSC Humanities: No age limit.',
-            },
-          },
-        ],
-      },
-      {
-        '@type': 'BreadcrumbList',
-        '@id': `${SITE_URL}/#breadcrumb`,
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'Home',
-            item: SITE_URL,
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: 'Eligibility & Fee Structure',
-            item: `${SITE_URL}/#eligibility`,
-          },
-          {
-            '@type': 'ListItem',
-            position: 3,
-            name: 'Frequently Asked Questions',
-            item: `${SITE_URL}/#faq`,
-          },
-          {
-            '@type': 'ListItem',
-            position: 4,
-            name: 'Admission Enquiry',
-            item: `${SITE_URL}/#enquiry`,
-          },
-        ],
-      },
     ],
   };
 
   return (
-    <html lang="en" className={`${jakarta.variable} ${dancing.variable}`} suppressHydrationWarning>
+    <html lang="en" className={jakarta.variable} suppressHydrationWarning>
       <body
-        className="font-sans antialiased bg-slate-50 text-slate-900 selection:bg-purple-900 selection:text-white"
+        className="font-sans antialiased bg-[#FAFAF7] text-[#17202A] selection:bg-[#0B3D26] selection:text-white"
         suppressHydrationWarning
       >
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#0B3D26] focus:text-white focus:rounded-md focus:shadow-md focus:outline-none"
+        >
+          Skip to main content
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function(regs) {
+                  for (var r of regs) { r.unregister(); }
+                });
+                if ('caches' in window) {
+                  caches.keys().then(function(names) {
+                    for (var n of names) { caches.delete(n); }
+                  });
+                }
+              }
+            `,
+          }}
+        />
+        <MotionReveal />
         {children}
       </body>
     </html>

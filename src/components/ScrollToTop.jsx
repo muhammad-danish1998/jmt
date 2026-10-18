@@ -8,14 +8,12 @@ export default function ScrollToTop() {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      // Appear after 1 screen of scroll, matching FloatingWhatsApp
+      setIsVisible(window.scrollY > 400);
     };
 
-    window.addEventListener('scroll', toggleVisibility);
+    toggleVisibility();
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
@@ -32,10 +30,10 @@ export default function ScrollToTop() {
     <button
       onClick={scrollToTop}
       type="button"
-      className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-slate-900 hover:bg-blue-900 text-white shadow-xl hover:shadow-2xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-blue-600 active:scale-95 animate-in fade-in zoom-in-75 border border-slate-700/50 cursor-pointer"
       aria-label="Scroll back to top"
+      className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#0B3D26] hover:bg-[#082d1c] text-white shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95 border border-white/20 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C89B3C]"
     >
-      <ArrowUp className="w-5 h-5" />
+      <ArrowUp className="w-5 h-5" strokeWidth={2.2} />
     </button>
   );
 }

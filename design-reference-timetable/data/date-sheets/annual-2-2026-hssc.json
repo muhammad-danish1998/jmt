@@ -1,0 +1,532 @@
+{
+  "session": "Annual (II) 2026",
+  "level": "HSSC",
+  "source": "https://zueb.edu.pk/wp-content/uploads/2026/10/Time-Table-HSSC-Annual-II-2026.pdf",
+  "sourceCheckedOn": "2026-10",
+  "classes": {
+    "XI": "HSSC Part I",
+    "XII": "HSSC Part II"
+  },
+  "shifts": [
+    "Morning shift: 09:30 AM to 12:30 PM",
+    "Afternoon shift: 02:00 PM to 05:00 PM",
+    "Afternoon shift: Friday Timing 02:30 PM to 05:30 PM"
+  ],
+  "instructions": [
+    "Carry your admit card, School / College ID and CNIC to the center.",
+    "All regular students must appear in their proper school / college uniforms.",
+    "Cheating material and impersonation are strictly prohibited.",
+    "Reach the center at least 15 minutes before the start of the exam and no later than 15 minutes after the Exam has begun.",
+    "The second Shift on Friday will start at 02:30 PM.",
+    "Keep visiting our website for any updates and changes in the Time Table",
+    "Exams will be held in Afternoon shift – 02:00 PM to 05:00 PM from Monday to Thursday, and both shifts on Saturday",
+    "Exams will be held in Afternoon shift at Friday – 02:30 PM to 05:30 PM"
+  ],
+  "papers": [
+    {
+      "date": "2026-11-17",
+      "day": "Tuesday",
+      "class": "XI",
+      "subject": "Principle Of Accounting",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Commerce"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-17",
+      "day": "Tuesday",
+      "class": "XI",
+      "subject": "Islamic Studies",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Humanities"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-18",
+      "day": "Wednesday",
+      "class": "XII",
+      "subject": "Principle Of Accounting",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Commerce"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-18",
+      "day": "Wednesday",
+      "class": "XII",
+      "subject": "Islamic Studies",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Humanities"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-19",
+      "day": "Thursday",
+      "class": "XI",
+      "subject": "Mathematics",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Pre-Engineering",
+        "General Science",
+        "Humanities"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-19",
+      "day": "Thursday",
+      "class": "XI",
+      "subject": "Principle Of Economics",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Commerce"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-20",
+      "day": "Friday",
+      "class": "XII",
+      "subject": "Pakistan Studies (2 Hours)",
+      "time": "02:30 PM to 04:00 PM",
+      "groups": [
+        "All Groups"
+      ],
+      "note": "printed exactly as in the ZUEB notice"
+    },
+    {
+      "date": "2026-11-21",
+      "day": "Saturday",
+      "class": "XI",
+      "subject": "Computer Science",
+      "time": "09:30 AM to 12:30 PM",
+      "groups": [
+        "General Science",
+        "Humanities"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-21",
+      "day": "Saturday",
+      "class": "XI",
+      "subject": "Hematology & Blood Banking",
+      "time": "09:30 AM to 12:30 PM",
+      "groups": [
+        "Medical Technology"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-21",
+      "day": "Saturday",
+      "class": "XII",
+      "subject": "Computer Science",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "General Science",
+        "Humanities"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-21",
+      "day": "Saturday",
+      "class": "XII",
+      "subject": "Clinical Pathology & Serology",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Medical Technology"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-23",
+      "day": "Monday",
+      "class": "XII",
+      "subject": "Mathematics",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Pre-Engineering",
+        "General Science",
+        "Humanities"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-23",
+      "day": "Monday",
+      "class": "XII",
+      "subject": "Commercial Geography",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Commerce"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-24",
+      "day": "Tuesday",
+      "class": "XI",
+      "subject": "Biology",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Pre-Medical"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-24",
+      "day": "Tuesday",
+      "class": "XI",
+      "subject": "Civics",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Humanities"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-24",
+      "day": "Tuesday",
+      "class": "XI",
+      "subject": "Bio-Chemistry",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Pre-Nursing"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-25",
+      "day": "Wednesday",
+      "class": "XII",
+      "subject": "Biology",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Pre-Medical"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-25",
+      "day": "Wednesday",
+      "class": "XII",
+      "subject": "Civics",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Humanities"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-26",
+      "day": "Thursday",
+      "class": "XI",
+      "subject": "English Normal / English Advanced",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "All Groups"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-27",
+      "day": "Friday",
+      "class": "XI",
+      "subject": "Islamiat / Religious Studies (2 Hours)",
+      "time": "02:30 PM to 04:30 PM",
+      "groups": [
+        "All Groups"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-28",
+      "day": "Saturday",
+      "class": "XI",
+      "subject": "Business Mathematics (2 Hours)",
+      "time": "09:30 PM to 11:30 PM",
+      "groups": [
+        "Commerce"
+      ],
+      "note": "printed exactly as in the ZUEB notice"
+    },
+    {
+      "date": "2026-11-28",
+      "day": "Saturday",
+      "class": "XI",
+      "subject": "Education",
+      "time": "09:30 PM to 12:30 PM",
+      "groups": [
+        "Humanities"
+      ],
+      "note": "printed exactly as in the ZUEB notice"
+    },
+    {
+      "date": "2026-11-28",
+      "day": "Saturday",
+      "class": "XI",
+      "subject": "Fundamental of Nursing",
+      "time": "09:30 PM to 12:30 PM",
+      "groups": [
+        "Pre-Nursing"
+      ],
+      "note": "printed exactly as in the ZUEB notice"
+    },
+    {
+      "date": "2026-11-28",
+      "day": "Saturday",
+      "class": "XII",
+      "subject": "Business Statistics (2 Hours)",
+      "time": "02:00 PM to 04:00 PM",
+      "groups": [
+        "Commerce"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-28",
+      "day": "Saturday",
+      "class": "XII",
+      "subject": "Education",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Humanities"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-11-30",
+      "day": "Monday",
+      "class": "XII",
+      "subject": "English Normal / English Advanced",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "All Groups"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-12-01",
+      "day": "Tuesday",
+      "class": "XI",
+      "subject": "Urdu Normal / Urdu Easy",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "All Groups"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-12-02",
+      "day": "Wednesday",
+      "class": "XII",
+      "subject": "Urdu Normal / Urdu Easy",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [],
+      "note": "group not printed in the notice"
+    },
+    {
+      "date": "2026-12-03",
+      "day": "Thursday",
+      "class": "XI",
+      "subject": "Physics",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Pre-Engineering",
+        "General Science",
+        "Pre-Medical"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-12-03",
+      "day": "Thursday",
+      "class": "XI",
+      "subject": "Sociology",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Humanities"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-12-03",
+      "day": "Thursday",
+      "class": "XI",
+      "subject": "Anatomy and Physiology",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Pre-Nursing"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-12-03",
+      "day": "Thursday",
+      "class": "XI",
+      "subject": "Elementary Anatomy & Micro Techniques",
+      "time": null,
+      "groups": [
+        "Medical Technology"
+      ],
+      "note": "time not printed in the notice"
+    },
+    {
+      "date": "2026-12-04",
+      "day": "Friday",
+      "class": "XII",
+      "subject": "Physics",
+      "time": "02:30 PM to 05:30 PM",
+      "groups": [
+        "Pre-Engineering",
+        "General Science",
+        "Pre-Medical"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-12-04",
+      "day": "Friday",
+      "class": "XII",
+      "subject": "Sociology",
+      "time": "02:30 PM to 05:30 PM",
+      "groups": [
+        "Humanities"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-12-05",
+      "day": "Saturday",
+      "class": "XI",
+      "subject": "Principle Of Commerce",
+      "time": "09:30 AM to 12:30 PM",
+      "groups": [
+        "Commerce"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-12-05",
+      "day": "Saturday",
+      "class": "XI",
+      "subject": "Nursing",
+      "time": "09:30 AM to 12:30 PM",
+      "groups": [
+        "Humanities"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-12-05",
+      "day": "Saturday",
+      "class": "XI",
+      "subject": "Micro Biology",
+      "time": "09:30 AM to 12:30 PM",
+      "groups": [
+        "Medical Technology"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-12-05",
+      "day": "Saturday",
+      "class": "XII",
+      "subject": "Banking",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Commerce"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-12-05",
+      "day": "Saturday",
+      "class": "XII",
+      "subject": "Nursing",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Humanities"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-12-05",
+      "day": "Saturday",
+      "class": "XII",
+      "subject": "Micro Biology",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Medical Technology"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-12-07",
+      "day": "Monday",
+      "class": "XI",
+      "subject": "Chemistry",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Pre-Engineering",
+        "Pre-Medical"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-12-07",
+      "day": "Monday",
+      "class": "XI",
+      "subject": "Economics",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Humanities"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-12-08",
+      "day": "Tuesday",
+      "class": "XII",
+      "subject": "Chemistry",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Pre-Engineering",
+        "Pre-Medical"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-12-08",
+      "day": "Tuesday",
+      "class": "XII",
+      "subject": "Economics",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Humanities"
+      ],
+      "note": null
+    },
+    {
+      "date": "2026-12-08",
+      "day": "Tuesday",
+      "class": "XII",
+      "subject": "Elementary Chemistry & Chemical Pathology",
+      "time": "02:00 PM to 05:00 PM",
+      "groups": [
+        "Medical Technology"
+      ],
+      "note": null
+    }
+  ]
+}

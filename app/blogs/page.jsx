@@ -1,45 +1,52 @@
-'use client';
-
-import React, { useState } from 'react';
-import TopBar from '../../src/components/TopBar';
+import React from 'react';
 import Navbar from '../../src/components/Navbar';
 import BlogsSection from '../../src/components/BlogsSection';
 import Footer from '../../src/components/Footer';
 import ScrollToTop from '../../src/components/ScrollToTop';
 import FloatingWhatsApp from '../../src/components/FloatingWhatsApp';
-import EnrollmentModal from '../../src/components/EnrollmentModal';
+import { getSupabase } from '../../src/lib/supabase';
 
-export default function BlogsPage() {
-  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+export const revalidate = 3600;
 
-  const handleOpenEnroll = () => setIsEnrollModalOpen(true);
-  const handleCloseEnroll = () => setIsEnrollModalOpen(false);
+async function getBlogs() {
+  try {
+    const supabase = getSupabase();
+    if (!supabase) return [];
+    const { data, error } = await supabase
+      .from('blogs')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Server error fetching blogs:', error);
+      return [];
+    }
+    return data || [];
+  } catch (err) {
+    console.error('Unexpected error in getBlogs server component:', err);
+    return [];
+  }
+}
+
+export default async function BlogsPage() {
+  const blogs = await getBlogs();
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50">
-      {/* 1. Top Bar */}
-      <TopBar onOpenEnroll={handleOpenEnroll} />
+    <div className="min-h-screen flex flex-col bg-[#FAFAF7] selection:bg-[#0B3D26] selection:text-white">
+      {/* Header / Navbar */}
+      <Navbar />
 
-      {/* 2. Header / Navbar */}
-      <Navbar onOpenEnroll={handleOpenEnroll} />
-
-      {/* 3. Blogs Section */}
-      <main className="flex-grow">
-        <BlogsSection onOpenEnroll={handleOpenEnroll} />
+      {/* Blogs Section (Server rendered with client interactivity) */}
+      <main id="main-content" className="flex-grow">
+        <BlogsSection initialBlogs={blogs} />
       </main>
 
-      {/* 4. Footer */}
+      {/* Footer */}
       <Footer />
 
-      {/* 5. Utility Floating Widgets */}
+      {/* Utility Floating Widgets */}
       <ScrollToTop />
       <FloatingWhatsApp />
-
-      {/* 6. Admission Modal */}
-      <EnrollmentModal
-        isOpen={isEnrollModalOpen}
-        onClose={handleCloseEnroll}
-      />
     </div>
   );
 }

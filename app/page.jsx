@@ -1,60 +1,64 @@
 'use client';
 
 import React, { useState } from 'react';
-import TopBar from '../src/components/TopBar';
 import Navbar from '../src/components/Navbar';
 import Hero from '../src/components/Hero';
 import AboutSection from '../src/components/AboutSection';
-import EligibilityAndFees from '../src/components/EligibilityAndFees';
 import WhyChooseUsGrid from '../src/components/WhyChooseUsGrid';
-import Testimonials from '../src/components/Testimonials';
-import VideoAndEnquiry from '../src/components/VideoAndEnquiry';
 import FAQ from '../src/components/FAQ';
-import CtaBand from '../src/components/CtaBand';
+import ContactSection from '../src/components/ContactSection';
 import Footer from '../src/components/Footer';
 import ScrollToTop from '../src/components/ScrollToTop';
 import FloatingWhatsApp from '../src/components/FloatingWhatsApp';
 import EnrollmentModal from '../src/components/EnrollmentModal';
+import { FAQ_DATA } from '../src/data/faqData';
 
 export default function HomePage() {
   const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
 
-  const handleOpenEnroll = () => setIsEnrollModalOpen(true);
+  const _handleOpenEnroll = () => setIsEnrollModalOpen(true);
   const handleCloseEnroll = () => setIsEnrollModalOpen(false);
 
-  return (
-    <div className="min-h-screen flex flex-col selection:bg-blue-900 selection:text-white">
-      {/* 1. Top Announcement & Contact Bar */}
-      <TopBar onOpenEnroll={handleOpenEnroll} />
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQ_DATA.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answerText,
+      },
+    })),
+  };
 
-      {/* 2. Sticky Header / Navbar */}
-      <Navbar onOpenEnroll={handleOpenEnroll} />
+  return (
+    <div className="min-h-screen flex flex-col selection:bg-[#0B3D26] selection:text-white">
+      {/* FAQPage JSON-LD for Home page only */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+
+      {/* Sticky Header / Navbar */}
+      <Navbar />
 
       {/* Main Content Sections */}
-      <main className="flex-grow">
-        {/* 3. Hero Section with Floating Trust Badges & Stats */}
-        <Hero onOpenEnroll={handleOpenEnroll} />
+      <main id="main-content" className="flex-grow">
+        {/* 1. Hero Section & How It Works Strip */}
+        <Hero />
 
-        {/* 4. About School & Academic Leadership Spotlight */}
-        <AboutSection onOpenEnroll={handleOpenEnroll} />
+        {/* 2. About JMT Section */}
+        <AboutSection />
 
-        {/* 5. Why Choose JMT (School Features & Differentiators) */}
-        <WhyChooseUsGrid onOpenEnroll={handleOpenEnroll} />
+        {/* 3. Why JMT & Scholarships Section */}
+        <WhyChooseUsGrid />
 
-        {/* 6. Eligibility Criteria & Fee Structure */}
-        <EligibilityAndFees />
+        {/* 4. Frequently Asked Questions (FAQ) */}
+        <FAQ />
 
-        {/* 7. Campus Video & Admission Enquiry Form */}
-        <VideoAndEnquiry />
-
-        {/* 8. Student & Parent Testimonials */}
-        <Testimonials />
-
-        {/* 9. Frequently Asked Questions (FAQ) */}
-        <FAQ onOpenEnroll={handleOpenEnroll} />
-
-        {/* 10. Pre-Footer Conversion CTA Band */}
-        <CtaBand onOpenEnroll={handleOpenEnroll} />
+        {/* 5. Contact & Admissions Section */}
+        <ContactSection />
       </main>
 
       {/* 14. Footer */}
