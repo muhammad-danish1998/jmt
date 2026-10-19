@@ -9,7 +9,6 @@ import {
   AlertCircle,
   Send,
   CloudUpload,
-  Calendar,
 } from 'lucide-react';
 
 export default function EnrollmentModal({ isOpen, onClose }) {
@@ -25,7 +24,6 @@ export default function EnrollmentModal({ isOpen, onClose }) {
   });
 
   const [selectedPhoto, setSelectedPhoto] = useState(null);
-  const [photoPreview, setPhotoPreview] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -42,8 +40,6 @@ export default function EnrollmentModal({ isOpen, onClose }) {
     const file = e.target.files?.[0];
     if (file) {
       setSelectedPhoto(file);
-      const previewUrl = URL.createObjectURL(file);
-      setPhotoPreview(previewUrl);
     }
   };
 
@@ -102,7 +98,6 @@ export default function EnrollmentModal({ isOpen, onClose }) {
     setIsSubmitted(false);
     setErrorMessage('');
     setSelectedPhoto(null);
-    setPhotoPreview(null);
     setFormData({
       firstName: '',
       lastName: '',
@@ -119,38 +114,37 @@ export default function EnrollmentModal({ isOpen, onClose }) {
   return (
     <div
       onClick={handleResetAndClose}
-      className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 overflow-y-auto animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 overflow-y-auto animate-in fade-in duration-200"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative max-w-lg w-full bg-white rounded-[24px] sm:rounded-[28px] shadow-2xl p-5 sm:p-7 border border-slate-100 my-6 animate-in zoom-in-95 duration-200"
+        className="relative max-w-lg w-full bg-white rounded-[28px] sm:rounded-[32px] shadow-2xl p-5 sm:p-7 border border-[#CFE0D6] my-6 animate-in zoom-in-95 duration-200"
       >
         {/* Close Button */}
         <button
           onClick={handleResetAndClose}
           type="button"
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100/90 hover:bg-slate-200 text-slate-400 hover:text-slate-700 flex items-center justify-center transition-colors focus:outline-none cursor-pointer"
+          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-[#FAFAF7] hover:bg-[#EAF2ED] text-[#5E6873] hover:text-[#0B3D26] flex items-center justify-center transition-colors focus:outline-none cursor-pointer border border-[#CFE0D6]"
           aria-label="Close modal"
         >
           <X className="w-4 h-4" />
         </button>
 
         {/* Modal Header */}
-        <div className="flex items-center gap-3.5 mb-5 pb-3">
+        <div className="flex items-center gap-3.5 mb-5 pb-3 border-b border-[#EAF2ED]">
           <div className="relative">
-            <div className="w-14 h-14 sm:w-15 sm:h-15 rounded-full bg-gradient-to-br from-[#4323b6] via-[#6335d8] to-[#361a99] text-white flex items-center justify-center shadow-lg shadow-indigo-500/30">
-              <GraduationCap className="w-7 h-7 text-white" />
+            <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-[#0B3D26] text-[#C89B3C] flex items-center justify-center shadow-md">
+              <GraduationCap className="w-7 h-7 text-[#C89B3C]" />
             </div>
-            <div className="absolute -inset-1 rounded-full bg-indigo-500/20 blur-sm -z-10" />
           </div>
           <div className="text-left">
-            <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            <h3 className="text-lg sm:text-xl font-extrabold text-[#17202A] tracking-tight leading-tight">
               JMT Public School
             </h3>
-            <div className="font-dancing text-lg sm:text-xl text-[#6335d8] font-bold leading-none mt-0.5">
+            <div className="text-sm sm:text-base text-[#C89B3C] font-bold leading-none mt-0.5">
               &amp; College Karachi
             </div>
-            <p className="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5">
+            <p className="text-[11px] sm:text-xs text-[#5E6873] font-medium mt-1">
               Ziauddin Examination Board (ZUEB) Admissions
             </p>
           </div>
@@ -159,18 +153,18 @@ export default function EnrollmentModal({ isOpen, onClose }) {
         {/* Form Body or Success Confirmation */}
         {isSubmitted ? (
           <div className="py-8 text-center space-y-4 animate-in fade-in">
-            <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-sm">
-              <CheckCircle2 className="w-10 h-10" />
+            <div className="w-16 h-16 bg-[#EAF2ED] text-[#0B3D26] rounded-full flex items-center justify-center mx-auto shadow-sm">
+              <CheckCircle2 className="w-10 h-10 text-[#0B3D26]" />
             </div>
-            <h4 className="text-2xl font-black text-slate-900">Admission Submitted!</h4>
-            <p className="text-xs sm:text-sm text-slate-600 max-w-sm mx-auto leading-relaxed">
-              Thank you, <strong className="text-slate-900">{formData.firstName} {formData.lastName}</strong>! Your application has been saved to our database. Our admission officer will contact you at{' '}
-              <strong className="text-slate-900">{formData.contactNumber}</strong> shortly.
+            <h4 className="text-2xl font-extrabold text-[#17202A]">Admission Submitted!</h4>
+            <p className="text-xs sm:text-sm text-[#3A4551] max-w-sm mx-auto leading-relaxed">
+              Thank you, <strong className="text-[#17202A]">{formData.firstName} {formData.lastName}</strong>! Your application has been saved. Our admission officer will contact you at{' '}
+              <strong className="text-[#0B3D26]">{formData.contactNumber}</strong> shortly.
             </p>
             <button
               type="button"
               onClick={handleResetAndClose}
-              className="mt-4 inline-flex items-center justify-center bg-[#4f27d8] hover:bg-[#3f1db8] text-white text-sm font-semibold px-7 py-2.5 rounded-full shadow-md transition-all cursor-pointer"
+              className="mt-4 inline-flex items-center justify-center bg-[#0B3D26] hover:bg-[#082d1c] text-white text-sm font-bold px-7 py-2.5 rounded-full shadow-md transition-all cursor-pointer"
             >
               Done
             </button>
@@ -197,12 +191,12 @@ export default function EnrollmentModal({ isOpen, onClose }) {
                   onChange={handleChange}
                   placeholder="First Name"
                   required
-                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-[#FAFAF7] border border-[#CFE0D6] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0B3D26]/20 focus:border-[#0B3D26] transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-800 mb-1">
+                <label className="block text-xs font-bold text-[#17202A] mb-1">
                   Last Name <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -212,7 +206,7 @@ export default function EnrollmentModal({ isOpen, onClose }) {
                   onChange={handleChange}
                   placeholder="Last Name"
                   required
-                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-[#FAFAF7] border border-[#CFE0D6] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0B3D26]/20 focus:border-[#0B3D26] transition-all"
                 />
               </div>
             </div>
@@ -220,7 +214,7 @@ export default function EnrollmentModal({ isOpen, onClose }) {
             {/* Row 2: Date of Birth & Gender */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-bold text-slate-800 mb-1">
+                <label className="block text-xs font-bold text-[#17202A] mb-1">
                   Date of Birth <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -229,12 +223,12 @@ export default function EnrollmentModal({ isOpen, onClose }) {
                   value={formData.dob}
                   onChange={handleChange}
                   required
-                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all text-slate-700"
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-[#FAFAF7] border border-[#CFE0D6] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0B3D26]/20 focus:border-[#0B3D26] transition-all text-[#17202A]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-800 mb-1">
+                <label className="block text-xs font-bold text-[#17202A] mb-1">
                   Gender <span className="text-rose-500">*</span>
                 </label>
                 <select
@@ -242,7 +236,7 @@ export default function EnrollmentModal({ isOpen, onClose }) {
                   value={formData.gender}
                   onChange={handleChange}
                   required
-                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all text-slate-700 font-medium"
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-[#FAFAF7] border border-[#CFE0D6] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0B3D26]/20 focus:border-[#0B3D26] transition-all text-[#17202A] font-medium"
                 >
                   <option value="">Select Gender</option>
                   <option value="Male">Male</option>
@@ -254,7 +248,7 @@ export default function EnrollmentModal({ isOpen, onClose }) {
 
             {/* Row 3: Class / Program */}
             <div>
-              <label className="block text-xs font-bold text-slate-800 mb-1">
+              <label className="block text-xs font-bold text-[#17202A] mb-1">
                 Class / Program <span className="text-rose-500">*</span>
               </label>
               <select
@@ -262,7 +256,7 @@ export default function EnrollmentModal({ isOpen, onClose }) {
                 value={formData.classProgram}
                 onChange={handleChange}
                 required
-                className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all text-slate-700 font-medium"
+                className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-[#FAFAF7] border border-[#CFE0D6] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0B3D26]/20 focus:border-[#0B3D26] transition-all text-[#17202A] font-medium"
               >
                 <option value="">Select Program</option>
                 <option value="Play Group / Kindergarten">Play Group / Kindergarten</option>
@@ -284,7 +278,7 @@ export default function EnrollmentModal({ isOpen, onClose }) {
 
             {/* Row 4: Address */}
             <div>
-              <label className="block text-xs font-bold text-slate-800 mb-1">
+              <label className="block text-xs font-bold text-[#17202A] mb-1">
                 Address <span className="text-rose-500">*</span>
               </label>
               <input
@@ -294,14 +288,14 @@ export default function EnrollmentModal({ isOpen, onClose }) {
                 onChange={handleChange}
                 placeholder="Your full address..."
                 required
-                className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
+                className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-[#FAFAF7] border border-[#CFE0D6] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0B3D26]/20 focus:border-[#0B3D26] transition-all"
               />
             </div>
 
             {/* Row 5: Contact Number & Email Address */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-bold text-slate-800 mb-1">
+                <label className="block text-xs font-bold text-[#17202A] mb-1">
                   Contact Number <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -311,12 +305,12 @@ export default function EnrollmentModal({ isOpen, onClose }) {
                   onChange={handleChange}
                   placeholder="0300 0000000"
                   required
-                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-[#FAFAF7] border border-[#CFE0D6] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0B3D26]/20 focus:border-[#0B3D26] transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-800 mb-1">
+                <label className="block text-xs font-bold text-[#17202A] mb-1">
                   Email Address
                 </label>
                 <input
@@ -325,14 +319,14 @@ export default function EnrollmentModal({ isOpen, onClose }) {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="your@email.com"
-                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-[#FAFAF7] border border-[#CFE0D6] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0B3D26]/20 focus:border-[#0B3D26] transition-all"
                 />
               </div>
             </div>
 
             {/* Row 6: Upload Student Photo */}
             <div>
-              <label className="block text-xs font-bold text-slate-800 mb-1">
+              <label className="block text-xs font-bold text-[#17202A] mb-1">
                 Upload Student Photo
               </label>
               <input
@@ -345,9 +339,9 @@ export default function EnrollmentModal({ isOpen, onClose }) {
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="w-full py-2.5 px-4 bg-slate-50 hover:bg-slate-100 border border-dashed border-slate-300 rounded-xl text-xs text-slate-700 font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                className="w-full py-2.5 px-4 bg-[#FAFAF7] hover:bg-[#EAF2ED] border border-dashed border-[#CFE0D6] rounded-xl text-xs text-[#3A4551] font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer"
               >
-                <CloudUpload className="w-4 h-4 text-indigo-600" />
+                <CloudUpload className="w-4 h-4 text-[#0B3D26]" />
                 <span>{selectedPhoto ? selectedPhoto.name : 'Choose Photo'}</span>
               </button>
             </div>
@@ -356,17 +350,17 @@ export default function EnrollmentModal({ isOpen, onClose }) {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="btn-shine w-full mt-3 bg-gradient-to-r from-[#4f27d8] via-[#5c2eec] to-[#4320bf] hover:from-[#4320bf] hover:to-[#3816a8] text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-indigo-500/25 text-sm sm:text-base flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-[0.98] disabled:opacity-60"
+              className="w-full mt-3 bg-[#C89B3C] hover:bg-[#b5892f] active:bg-[#a67a24] text-[#0B3D26] font-bold py-3.5 px-6 rounded-[14px_30px_14px_30px] shadow-md text-sm sm:text-base flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-[0.98] disabled:opacity-60"
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="w-4 h-4 animate-spin text-white" />
+                  <Loader2 className="w-4 h-4 animate-spin text-[#0B3D26]" />
                   <span>Saving to Database...</span>
                 </>
               ) : (
                 <>
-                  <Send className="w-4 h-4 fill-white -rotate-12" />
-                  <span>Submit Admission</span>
+                  <Send className="w-4 h-4 fill-current -rotate-12" />
+                  <span>Submit Admission Application</span>
                 </>
               )}
             </button>
@@ -376,4 +370,5 @@ export default function EnrollmentModal({ isOpen, onClose }) {
     </div>
   );
 }
+
 

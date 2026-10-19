@@ -1,7 +1,14 @@
 import './globals.css';
-import { Plus_Jakarta_Sans } from 'next/font/google';
+import { Quicksand, Plus_Jakarta_Sans } from 'next/font/google';
 import { SITE } from '../src/lib/site';
 import MotionReveal from '../src/components/MotionReveal';
+
+const quicksand = Quicksand({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-quicksand',
+});
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -190,7 +197,7 @@ export default function RootLayout({ children }) {
   };
 
   return (
-    <html lang="en" className={jakarta.variable} suppressHydrationWarning>
+    <html lang="en" className={`${quicksand.variable} ${jakarta.variable}`} suppressHydrationWarning>
       <body
         className="font-sans antialiased bg-[#FAFAF7] text-[#17202A] selection:bg-[#0B3D26] selection:text-white"
         suppressHydrationWarning

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { ArrowRight, HelpCircle, MessageCircle } from 'lucide-react';
 import { SITE } from '../lib/site';
 
 const FAQ_ITEMS = [
@@ -9,8 +10,8 @@ const FAQ_ITEMS = [
     id: 'combined-gap',
     question: 'Who can take the Combined (Gap) exam?',
     answer: (
-      <p className="m-0 text-base leading-[26px] text-[#3A4551]">
-        Candidates with a gap of at least two years after passing Grade VIII (Combined SSC) or SSC (Combined HSSC) can appear as private candidates. Age limits and the pass year depend on the exam session, so check the page for your session:{' '}
+      <p className="m-0 text-base leading-[26px] text-[#3A4551] font-medium">
+        Candidates with an academic gap of at least two years after passing Grade VIII (Combined SSC Matric) or SSC (Combined HSSC Intermediate) can appear as private candidates under ZUEB. Check session details:{' '}
         <Link href="/eligibility/annual-1-2027" className="font-bold text-[#0B3D26] hover:underline">
           Annual (I) 2027
         </Link>{' '}
@@ -26,19 +27,19 @@ const FAQ_ITEMS = [
     id: 'result-time',
     question: 'How long does it take to get my result?',
     answer: (
-      <p className="m-0 text-base leading-[26px] text-[#3A4551]">
-        Your result comes about two months after the exam. Exam and result dates are set by ZUEB.
+      <p className="m-0 text-base leading-[26px] text-[#3A4551] font-medium">
+        Official marksheet and results are typically published by Ziauddin University Examination Board (ZUEB) approximately 60 days following the conclusion of written examinations.
       </p>
     ),
   },
   {
     id: 'documents',
-    question: 'Which documents do I need?',
+    question: 'Which documents do I need to submit?',
     answer: (
-      <p className="m-0 text-base leading-[26px] text-[#3A4551]">
-        Every candidate needs a B-Form / CRC / CNIC copy and a recent formal photo with a blue or white background. Some categories also need a School Leaving Certificate or an SSC Marksheet &amp; Certificate. Upload scans of the originals, because photocopies are not accepted.{' '}
+      <p className="m-0 text-base leading-[26px] text-[#3A4551] font-medium">
+        Every applicant requires a B-Form / CNIC copy, 4 passport-size photographs, and your last educational certificate (Grade VIII certificate, Middle pass, or SSC Marksheet). Original scans must be provided for board verification.{' '}
         <Link href="/eligibility" className="font-bold text-[#0B3D26] hover:underline">
-          See documents by category
+          See full document checklist
         </Link>
         .
       </p>
@@ -46,10 +47,10 @@ const FAQ_ITEMS = [
   },
   {
     id: 'migration',
-    question: 'I passed Matric from a board outside Sindh. What do I need?',
+    question: 'I passed Matric from another board outside Sindh. Can I apply?',
     answer: (
-      <p className="m-0 text-base leading-[26px] text-[#3A4551]">
-        You need a Migration Certificate / NOC issued in the name of the Ziauddin University Examination Board (ZUEB), along with your other documents.
+      <p className="m-0 text-base leading-[26px] text-[#3A4551] font-medium">
+        Yes! Candidates from Federal Board, Punjab, KPK, Balochistan, or other Sindh boards can easily enroll. You will simply need an official Migration Certificate / NOC addressed to Ziauddin University Examination Board (ZUEB).
       </p>
     ),
   },
@@ -57,10 +58,10 @@ const FAQ_ITEMS = [
     id: 'sessions',
     question: 'What is the difference between Annual (I) and Annual (II)?',
     answer: (
-      <p className="m-0 text-base leading-[26px] text-[#3A4551]">
-        ZUEB holds two annual examinations, Annual (I) and Annual (II), and the eligibility rules differ for each. For example, Part I students who appeared in the Annual (I) 2026 exam are not eligible for Annual (II) 2026. Choose your session on the{' '}
+      <p className="m-0 text-base leading-[26px] text-[#3A4551] font-medium">
+        ZUEB conducts two main examination cycles annually. Annual (I) is typically held in Spring/Summer, while Annual (II) is held in Autumn. Choose your session on our{' '}
         <Link href="/eligibility" className="font-bold text-[#0B3D26] hover:underline">
-          Eligibility page
+          Eligibility Page
         </Link>
         .
       </p>
@@ -68,41 +69,39 @@ const FAQ_ITEMS = [
   },
   {
     id: 'scholarships',
-    question: 'Do you offer scholarships?',
+    question: 'Are installment plans and scholarships available?',
     answer: (
-      <p className="m-0 text-base leading-[26px] text-[#3A4551]">
-        Yes. We offer a merit scholarship based on your previous result, and need-based support with documents. Criteria and amounts are decided by JMT administration, so message our admissions team to apply.
+      <p className="m-0 text-base leading-[26px] text-[#3A4551] font-medium">
+        Yes, JMT offers flexible installment arrangements as well as merit scholarships for top performers and need-based fee reductions for deserving families. Contact our counseling desk for assessment.
       </p>
     ),
   },
   {
-    id: 'installments',
-    question: 'Can I pay the fee in installments?',
+    id: 'study-support',
+    question: 'Do I have to attend physical classes daily?',
     answer: (
-      <p className="m-0 text-base leading-[26px] text-[#3A4551]">
-        Yes, you can pay in installments. Message our admissions team on WhatsApp and we will arrange a plan that suits you.
+      <p className="m-0 text-base leading-[26px] text-[#3A4551] font-medium">
+        No, gap candidates and working students have flexible study arrangements. We provide comprehensive notes, past papers, exam guidelines, and mock tests to prepare you thoroughly from home.
       </p>
     ),
   },
   {
     id: 'apply-steps',
-    question: 'How do I apply?',
+    question: 'How do I complete my admission?',
     answer: (
-      <ol className="m-0 p-0 list-none flex flex-col gap-2.5">
+      <ol className="m-0 p-0 list-none flex flex-col gap-2.5 font-medium">
         {[
-          'Send clear pictures of your original documents on WhatsApp, in JPG or PNG format.',
-          'We send you the enrollment challan. Pay it.',
-          'Your enrollment card arrives.',
-          'Pay the examination challan.',
-          'Your admit card arrives.',
-          'Appear in the exam.',
-          'Your result arrives about two months after the exam.',
+          'Send your last pass marksheet and B-Form to our admissions desk via WhatsApp.',
+          'We verify your eligibility and issue your official enrollment challan.',
+          'Receive your ZUEB enrollment card and examination schedule.',
+          'Appear in your scheduled examination center in Karachi.',
+          'Receive your official ZUEB certificate, recognized by IBCC & HEC.',
         ].map((step, idx) => (
           <li key={idx} className="flex items-start gap-3">
-            <span className="w-6 h-6 rounded-full bg-[#C89B3C] text-[#17202A] flex items-center justify-center text-[13px] leading-4 font-bold shrink-0 mt-0.5">
+            <span className="w-6 h-6 rounded-full bg-[#0B3D26] text-[#C89B3C] flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 shadow-2xs">
               {idx + 1}
             </span>
-            <span className="text-base leading-[26px] text-[#3A4551]">
+            <span className="text-sm sm:text-base leading-[24px] text-[#3A4551]">
               {step}
             </span>
           </li>
@@ -114,61 +113,42 @@ const FAQ_ITEMS = [
 
 function StillHaveQuestionsCard({ className = '' }) {
   return (
-    <div className={`flex flex-col gap-3.5 p-6 sm:p-7 rounded-2xl bg-[#0B3D26] text-white ${className}`}>
-      <h3 className="m-0 text-xl sm:text-[22px] leading-7 sm:leading-[30px] font-extrabold text-white">
-        Still have questions?
-      </h3>
-      <p className="m-0 text-sm sm:text-[15px] leading-6 text-[#CFE0D6]">
-        Chat with our admissions team. Share your last exam year and age, and we confirm your category.
-      </p>
+    <div className={`flex flex-col gap-4 p-6 sm:p-8 rounded-[28px] sm:rounded-[32px] bg-gradient-to-br from-[#0B3D26] to-[#2E6B4A] text-white shadow-xl border border-white/10 ${className}`}>
+      <div className="w-12 h-12 rounded-2xl bg-[#C89B3C]/20 text-[#C89B3C] flex items-center justify-center shrink-0">
+        <HelpCircle className="w-6 h-6" />
+      </div>
+
+      <div className="flex flex-col gap-1 text-left">
+        <h3 className="m-0 text-xl sm:text-[22px] leading-tight font-extrabold text-white">
+          Still have questions?
+        </h3>
+        <p className="m-0 text-sm leading-6 text-[#CFE0D6] font-medium">
+          Chat directly with our admissions counselor. Share your age and last exam year, and we verify your exact category in minutes.
+        </p>
+      </div>
+
       <a
-        href={SITE.whatsapp}
+        href={SITE.whatsappApplyMessage}
         target="_blank"
         rel="noopener noreferrer"
-        className="btn flex items-center justify-center gap-2.5 h-[52px] px-6 rounded-lg bg-white text-[#0B3D26] text-[15px] leading-5 font-bold transition-all shadow-xs mt-1"
+        className="inline-flex items-center justify-center gap-2.5 h-13 px-6 rounded-[14px_30px_14px_30px] bg-[#C89B3C] hover:bg-white text-[#0B3D26] text-sm font-bold transition-all shadow-md mt-1"
       >
-        <svg
-          aria-hidden="true"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#0B3D26"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
-        </svg>
-        <span>Ask Admissions on WhatsApp</span>
+        <MessageCircle className="w-4 h-4 text-[#0B3D26]" />
+        <span>Ask on WhatsApp</span>
       </a>
+
       <Link
         href="/eligibility"
-        className="btn inline-flex items-center gap-2 min-h-[44px] text-sm leading-5 font-bold text-white hover:underline mt-0.5"
+        className="inline-flex items-center gap-2 text-xs font-bold text-[#EAF2ED] hover:text-[#C89B3C] transition-colors"
       >
-        <span>View eligibility criteria</span>
-        <svg
-          aria-hidden="true"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#FFFFFF"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="arrow"
-        >
-          <path d="M5 12h14" />
-          <path d="m12 5 7 7-7 7" />
-        </svg>
+        <span>View eligibility criteria guide</span>
+        <ArrowRight className="w-3.5 h-3.5" />
       </Link>
     </div>
   );
 }
 
 export default function FAQ() {
-  // First item open by default as in design-reference
   const [openItem, setOpenItem] = useState(0);
 
   const toggleItem = (index) => {
@@ -176,26 +156,38 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="w-full bg-white text-[#17202A] overflow-hidden">
-      <div className="max-w-[1440px] mx-auto box-border px-4 sm:px-8 lg:px-16 py-14 sm:py-20 lg:py-24">
+    <section id="faq" className="relative w-full bg-[#FAFAF7] text-[#17202A] overflow-hidden scroll-mt-20 sm:scroll-mt-24 pt-14 sm:pt-20 lg:pt-24">
+      {/* Subtle background ambient lights */}
+      <div
+        className="absolute top-10 left-10 w-80 h-80 rounded-full bg-[#EAF2ED] blur-3xl pointer-events-none"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-[1440px] mx-auto box-border px-4 sm:px-8 lg:px-16 pb-14 sm:pb-20 lg:pb-24 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-8 sm:gap-12 lg:gap-16 items-start">
           
-          {/* Left Column: Header & (on desktop) Still Have Questions Card */}
-          <div className="reveal flex flex-col gap-7 sm:gap-8">
+          {/* Left Column: Header & Desktop Still Have Questions Card */}
+          <div className="reveal flex flex-col gap-6 sm:gap-8">
             <div className="flex flex-col items-start text-left">
-              <div className="flex items-center gap-3">
-                <span className="w-6 sm:w-7 h-[2px] bg-[#C89B3C] block shrink-0" />
-                <p className="m-0 text-xs sm:text-[13px] leading-5 font-bold tracking-[0.1em] sm:tracking-[0.12em] uppercase text-[#2E6B4A]">
-                  FAQ
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#EAF2ED] border border-[#CFE0D6] shadow-xs">
+                <span className="flex h-2.5 w-2.5 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C89B3C] opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#C89B3C]" />
+                </span>
+                <p className="m-0 text-xs sm:text-[13px] leading-none font-bold tracking-[0.06em] uppercase text-[#0B3D26]">
+                  Frequently Asked Questions
                 </p>
               </div>
 
-              <h2 className="m-0 mt-3 sm:mt-4 text-[26px] sm:text-[32px] lg:text-[36px] leading-[34px] sm:leading-[40px] lg:leading-[44px] font-extrabold tracking-[-0.01em] text-[#17202A]">
-                Questions we hear most
+              <h2 className="m-0 mt-4 sm:mt-5 text-[28px] sm:text-[36px] lg:text-[42px] leading-[36px] sm:leading-[44px] lg:leading-[50px] font-extrabold tracking-[-0.015em] text-[#17202A]">
+                Everything you need to know about{' '}
+                <span className="text-[#0B3D26] bg-[#EAF2ED] px-2.5 py-0.5 rounded-2xl border border-[#CFE0D6]/80 shadow-xs inline-block my-1">
+                  ZUEB Admissions
+                </span>
               </h2>
 
-              <p className="m-0 mt-3 max-w-[440px] text-base sm:text-[17px] leading-[26px] sm:leading-7 text-[#3A4551]">
-                Quick answers about eligibility, documents, fees and scholarships.
+              <p className="m-0 mt-3 sm:mt-4 max-w-[460px] text-base sm:text-lg leading-[26px] sm:leading-[29px] text-[#3A4551] font-medium">
+                Clear answers regarding eligibility rules, gap exams, required documents, fee structures, and scholarship assistance.
               </p>
             </div>
 
@@ -203,17 +195,17 @@ export default function FAQ() {
             <StillHaveQuestionsCard className="hidden lg:flex" />
           </div>
 
-          {/* Right Column: 8 Accordion Items */}
-          <div className="reveal flex flex-col gap-3" style={{ '--i': 1 }}>
+          {/* Right Column: Accordion Items — Smarty-style rounded cards */}
+          <div className="reveal flex flex-col gap-3.5" style={{ '--i': 1 }}>
             {FAQ_ITEMS.map((item, idx) => {
               const isOpen = openItem === idx;
               return (
                 <div
                   key={item.id}
-                  className={`rounded-xl border transition-all duration-200 overflow-hidden ${
+                  className={`rounded-2xl sm:rounded-3xl border transition-all duration-200 overflow-hidden ${
                     isOpen
-                      ? 'bg-[#F2F7F4] border-[#CFE0D6]'
-                      : 'bg-[#FAFAF7] border-[#E5E7EB] hover:border-[#CFE0D6]'
+                      ? 'bg-white border-[#CFE0D6] shadow-md border-l-4 border-l-[#0B3D26]'
+                      : 'bg-white/80 border-[#E5E7EB] hover:border-[#CFE0D6] hover:bg-white shadow-2xs'
                   }`}
                 >
                   <button
@@ -222,67 +214,33 @@ export default function FAQ() {
                     aria-expanded={isOpen}
                     aria-controls={`faq-answer-${item.id}`}
                     id={`faq-question-${item.id}`}
-                    className="w-full flex items-center justify-between gap-4 min-h-[44px] p-4 sm:p-5 sm:px-6 cursor-pointer text-left bg-transparent border-none"
+                    className="w-full flex items-center justify-between gap-4 min-h-[52px] p-4.5 sm:p-5 sm:px-6 cursor-pointer text-left bg-transparent border-none"
                   >
-                    <span className="text-base sm:text-[17px] leading-6 sm:leading-[26px] font-bold text-[#17202A]">
+                    <span className="text-base sm:text-[17px] leading-snug font-bold text-[#17202A]">
                       {item.question}
                     </span>
 
-                    {/* Smooth Plus/Minus Toggle Icon (150ms fade) */}
-                    <span className="w-8 h-8 rounded-full bg-[#EAF2ED] flex items-center justify-center shrink-0 relative">
-                      {/* Plus icon */}
-                      <svg
-                        aria-hidden="true"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="#0B3D26"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className={`absolute transition-all duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                          isOpen
-                            ? 'opacity-0 rotate-90 scale-75 pointer-events-none'
-                            : 'opacity-100 rotate-0 scale-100'
-                        }`}
-                      >
-                        <path d="M5 12h14" />
-                        <path d="M12 5v14" />
-                      </svg>
-                      {/* Minus icon */}
-                      <svg
-                        aria-hidden="true"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="#0B3D26"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className={`transition-all duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                          isOpen
-                            ? 'opacity-100 rotate-0 scale-100'
-                            : 'opacity-0 -rotate-90 scale-75 pointer-events-none'
-                        }`}
-                      >
-                        <path d="M5 12h14" />
-                      </svg>
+                    {/* Smarty-style Circular Toggle Icon */}
+                    <span className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-200 ${
+                      isOpen ? 'bg-[#0B3D26] text-[#C89B3C]' : 'bg-[#EAF2ED] text-[#0B3D26]'
+                    }`}>
+                      <span className="text-base font-extrabold leading-none">
+                        {isOpen ? '−' : '+'}
+                      </span>
                     </span>
                   </button>
 
-                  {/* Smooth Grid Rows Height Animation */}
+                  {/* Smooth Accordion Content */}
                   <div
                     id={`faq-answer-${item.id}`}
                     role="region"
                     aria-labelledby={`faq-question-${item.id}`}
-                    className={`grid transition-[grid-template-rows] duration-250 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                    className={`grid transition-[grid-template-rows] duration-250 ease-out ${
                       isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
                     }`}
                   >
                     <div className="overflow-hidden">
-                      <div className="px-4 pb-4 sm:px-6 sm:pb-5 pt-0">
+                      <div className="px-4.5 pb-5 sm:px-6 sm:pb-6 pt-1 border-t border-[#EAF2ED]">
                         {item.answer}
                       </div>
                     </div>
